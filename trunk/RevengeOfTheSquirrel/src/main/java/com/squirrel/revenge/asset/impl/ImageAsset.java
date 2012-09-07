@@ -1,0 +1,37 @@
+package com.squirrel.revenge.asset.impl;
+
+import java.awt.Image;
+
+import com.squirrel.revenge.asset.Asset;
+
+/**
+ * Dieser AssetTyp ehntält ein Image
+ * 
+ * @author Shane
+ *
+ */
+public class ImageAsset extends Asset {
+
+	/**
+	 * enthält die Type Konstante des ImageAsset
+	 */
+	public static final String IMAGE_ASSET_TYPE = "image-asset-type";
+	
+	/**
+	 * Das gehaltene Image
+	 */
+	private Image image;
+	
+	@Override
+	public String getType() {
+		return IMAGE_ASSET_TYPE;
+	}
+	
+	/**
+	 * Gibt das Image zurück
+	 * @return
+	 */
+	public Image getImage() {
+		return image;
+	}
+}
