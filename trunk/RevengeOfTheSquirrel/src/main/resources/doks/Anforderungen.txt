@@ -1,0 +1,34 @@
+Anforderungen für 
+	Revenge of the Squirrel
+	
+	
+Story
+- Vorräte wurden geklaut
+- Ziel des Spiels: Vorräte zurückholen/Täter finden
+- Fängt im Wald an
+- lebt in ieinem großen Baum
+- kontrolliert Vorräte -> vorräte weg
+- Täter hat spuren hinterlassen
+- Protagonist sammelt spuren und wird durch diese geleitet
+- Wald -> Vorstadt -> Untergrund -> Gebäude
+- Täter: 
+	- Kartell von Waschbären
+	- von verkleideter Katze angeführt
+	- Katze will Eichhörnchen ausrotten
+	- Katze hat sich zum Anführer der Waschbären hochgekämpft
+	- befiehlt den Waschbären den Diebstahl aller Eichhörnchenvorräte
+	- der Katze wurde mal ein Stück trockenfutter von einem Eichhörnchen geklaut
+- verwirrende Spuren
+
+
+Gameplay
+- rasierte Nüsse als Coins
+- mehrer Level
+- Spezielle Nussarten für Statboni
+- Belohnung für Level: besondere Nüsse/Teile von Vorräten
+- Rätsel
+- Achievements
+- versteckte Items
+- Nutcounter (Score)
+- Countdown
+- Timerun
