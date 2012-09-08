@@ -1,8 +1,9 @@
-package com.squirrel.engine.scene.impl;
+package com.squirrel.revenge.layer;
 
 import java.awt.Point;
 
 import com.squirrel.engine.gameobject.impl.TextualGameObject;
+import com.squirrel.engine.scene.impl.LayerImpl;
 
 public class HUDLayer extends LayerImpl {
 	

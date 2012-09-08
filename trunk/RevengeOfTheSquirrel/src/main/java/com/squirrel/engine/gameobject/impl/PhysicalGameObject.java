@@ -4,8 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import com.squirrel.engine.asset.Asset;
-import com.squirrel.engine.asset.impl.ImageAsset;
+import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.GameManager;
 import com.squirrel.engine.gameobject.Collidable;
@@ -13,20 +12,20 @@ import com.squirrel.engine.gameobject.Drawable;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.Updateable;
 import com.squirrel.engine.scene.Layer;
-import com.squirrel.engine.utils.SquirrelRevengeUtils;
+import com.squirrel.engine.utils.ApplicationUtils;
 
 public class PhysicalGameObject extends GameObject implements Collidable,
 		Drawable, Updateable {
 
-	protected Asset asset;
 	protected Rectangle[] collisionBoxes;
+	protected SpriteAsset texture;
 	
-	private GameManager gm; 
+	private GameManager gm;
 	
 	public PhysicalGameObject(String identifier, Layer parent) {
 		super(identifier, parent);
 		
-		gm = (GameManager) SquirrelRevengeUtils.getInstance().getBean("gameManager");
+		gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 	}
 
 	/**
@@ -49,15 +48,18 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 
 	@Override
 	public void draw(Graphics g) {
-		if (asset != null && asset.getType().equals(ImageAsset.IMAGE_ASSET_TYPE))
-			g.drawImage(((ImageAsset)asset).getImage(), (int) posx, (int) posy, null);
+		// Wenn eine Textur gesetzt ist, dann soll diese gezeichnet
+		if (texture != null)
+			g.drawImage(texture.getImage(), (int) posx, (int) posy, null);
 		
 		// Wenn im DebugMode, dann Boundingboxen zeichnen
 		if (gm.isDebug()) {
+			Color color =g.getColor();
 			g.setColor(Color.yellow);
 			for (Rectangle rect : collisionBoxes) {
 				g.drawRect((int) (rect.x + posx), (int) (rect.y + posy), rect.width, rect.height);
 			}
+			g.setColor(color);
 		}
 	}
 
@@ -102,5 +104,9 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 	public void setPosition(double x, double y) {
 		this.posx = x;
 		this.posy = y;
+	}
+
+	public void setTexture(SpriteAsset texture) {
+		this.texture = texture;
 	}
 }

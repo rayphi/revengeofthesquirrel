@@ -2,12 +2,12 @@ package com.squirrel.engine.utils;
 
 import org.springframework.context.ApplicationContext;
 
-public class SquirrelRevengeUtils {
+public class ApplicationUtils {
 
-	private static SquirrelRevengeUtils instance;
+	private static ApplicationUtils instance;
 	private ApplicationContext ctx;
 	
-	public static SquirrelRevengeUtils getInstance() {
+	public static ApplicationUtils getInstance() {
 		if (instance == null) {
 			System.out.println("SquirrelRevengeUtils not initialized!!!");
 			return null;
@@ -16,7 +16,7 @@ public class SquirrelRevengeUtils {
 		}
 	}
 	
-	public SquirrelRevengeUtils(ApplicationContext ctx) {
+	public ApplicationUtils(ApplicationContext ctx) {
 		this.ctx = ctx;
 		instance = this;
 	}

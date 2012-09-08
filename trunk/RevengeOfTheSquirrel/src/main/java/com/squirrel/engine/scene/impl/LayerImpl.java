@@ -11,7 +11,7 @@ import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.Updateable;
 import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.statistics.PerformanceStatistics;
-import com.squirrel.engine.utils.SquirrelRevengeUtils;
+import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
  * Repräsentiert einen Layer in einer Szene. Es soll nicht alles auf einem Layer sein,
@@ -33,8 +33,8 @@ public class LayerImpl implements Layer{
 		removeObjects = new HashSet<GameObject>();
 		addAtUpdate = new HashSet<GameObject>();
 		
-		ps = (PerformanceStatistics) SquirrelRevengeUtils.getInstance().getBean("performanceStatistics");
-		gm = (GameManager) SquirrelRevengeUtils.getInstance().getBean("gameManager");
+		ps = (PerformanceStatistics) ApplicationUtils.getInstance().getBean("performanceStatistics");
+		gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 	}
 	
 	public String getName() {

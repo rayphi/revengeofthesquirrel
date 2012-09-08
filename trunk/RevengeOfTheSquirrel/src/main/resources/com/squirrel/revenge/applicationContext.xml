@@ -30,11 +30,16 @@
 	</bean>
 	
 	<!-- ********************** Annotation-Handling ************************************************ -->
-	<context:component-scan base-package="com.squirrel.revenge" />
+	<context:component-scan base-package="com.squirrel" />
 	<context:annotation-config />
 
-	<bean id="performanceStatistics" class="com.squirrel.revenge.statistics.PerformanceStatistics" scope="singleton" />
-	<bean id="gameManager" class="com.squirrel.revenge.game.GameManager" scope="singleton" >
+	<bean id="configuration" class="com.squirrel.engine.game.Configuration" scope="singleton">
+		
+	</bean>
+	<bean id="assetManager" class="com.squirrel.engine.asset.impl.AssetManagerImpl" scope="singleton" />
+	<bean id="sceneFactory" class="com.squirrel.engine.scene.impl.SceneFactoryImpl" scope="singleton" />
+	<bean id="performanceStatistics" class="com.squirrel.engine.statistics.PerformanceStatistics" scope="singleton" />
+	<bean id="gameManager" class="com.squirrel.engine.game.GameManager" scope="singleton" >
 		<property name="debug" value="true" />
 	</bean>
 </beans>

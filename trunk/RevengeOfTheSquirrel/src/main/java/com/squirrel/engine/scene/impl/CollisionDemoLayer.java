@@ -3,9 +3,13 @@ package com.squirrel.engine.scene.impl;
 import java.awt.Rectangle;
 import java.util.Random;
 
+import com.squirrel.engine.asset.AssetManager;
+import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
+import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.impl.PhysicalGameObject;
+import com.squirrel.engine.utils.ApplicationUtils;
 
 public class CollisionDemoLayer extends LayerImpl {
 
@@ -27,11 +31,14 @@ public class CollisionDemoLayer extends LayerImpl {
 	}
 	
 	private GameObject generateObj(String id) {
+		final Configuration configuration = (Configuration) ApplicationUtils.getInstance().getBean("configuration");;
+		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
 		
 		PhysicalGameObject obj = new PhysicalGameObject(id, this){
-			private double maxSpeed = 20;
+			private double maxSpeed = 35;
 			private double speed_x = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private double speed_y = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
+			private Configuration config = configuration;
 			
 			@Override
 			public void customUpdate() {
@@ -41,10 +48,10 @@ public class CollisionDemoLayer extends LayerImpl {
 				posx = posx + (speed_x / ps.getFPS());
 				posy = posy + (speed_y / ps.getFPS());
 				
-				if (posx + 5 <= 0) posx = 799;
-				if (posx > 799) posx = -4;
-				if (posy + 5 <= 0) posy = 599;
-				if (posy > 599) posy = -4;
+				if (posx + 5 <= 0) posx = config.getScreenWidth() - 1;
+				if (posx >= config.getScreenWidth()) posx = -4;
+				if (posy + 5 <= 0) posy = config.getScreenHeight() - 1;
+				if (posy >= config.getScreenHeight()) posy = -4;
 			}
 			
 			@Override
@@ -55,9 +62,10 @@ public class CollisionDemoLayer extends LayerImpl {
 			}
 		};
 		
-		Rectangle[] bboxes = {new Rectangle(0,0,5,5)};
+		obj.setTexture((SpriteAsset) am.load("rock", "assets/images/rock.png"));
+		Rectangle[] bboxes = {new Rectangle(0,0,15,14)};
 		obj.setCollisionBoxes(bboxes);
-		obj.setPosition(r.nextDouble() * 800, r.nextDouble() * 600);
+		obj.setPosition(r.nextDouble() * configuration.getScreenWidth(), r.nextDouble() * configuration.getScreenHeight());
 		
 		return obj;
 	}

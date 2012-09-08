@@ -10,7 +10,7 @@ import com.squirrel.engine.asset.Asset;
  * @author Shane
  *
  */
-public class ImageAsset extends Asset {
+public class SpriteAsset extends Asset {
 
 	/**
 	 * enthält die Type Konstante des ImageAsset
@@ -21,6 +21,10 @@ public class ImageAsset extends Asset {
 	 * Das gehaltene Image
 	 */
 	private Image image;
+	
+	public SpriteAsset(Image image) {
+		this.image = image;
+	}
 	
 	@Override
 	public String getType() {
