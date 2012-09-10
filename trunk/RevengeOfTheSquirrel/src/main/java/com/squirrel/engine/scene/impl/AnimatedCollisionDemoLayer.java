@@ -8,15 +8,16 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.GameObject;
+import com.squirrel.engine.gameobject.impl.AnimatedPhysicalGameObject;
 import com.squirrel.engine.gameobject.impl.PhysicalGameObject;
 import com.squirrel.engine.utils.ApplicationUtils;
 
-public class CollisionDemoLayer extends LayerImpl {
+public class AnimatedCollisionDemoLayer extends LayerImpl {
 
 	private int numberTargets;
 	private Random r;
 	
-	public CollisionDemoLayer(int count) {
+	public AnimatedCollisionDemoLayer(int count) {
 		super("CollisionDemo");
 		numberTargets = count;
 		r = new Random(System.currentTimeMillis());
@@ -34,8 +35,8 @@ public class CollisionDemoLayer extends LayerImpl {
 		final Configuration configuration = (Configuration) ApplicationUtils.getInstance().getBean("configuration");;
 		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
 		
-		PhysicalGameObject obj = new PhysicalGameObject(id, this){
-			private double maxSpeed = 35;
+		AnimatedPhysicalGameObject obj = new AnimatedPhysicalGameObject(id, this){
+			private double maxSpeed = 50;
 			private double speed_x = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private double speed_y = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private Configuration config = configuration;
@@ -48,10 +49,10 @@ public class CollisionDemoLayer extends LayerImpl {
 				posx = posx + (speed_x / ps.getFPS());
 				posy = posy + (speed_y / ps.getFPS());
 				
-				if (posx + 5 <= 0) posx = config.getScreenWidth() - 1;
-				if (posx >= config.getScreenWidth()) posx = -4;
-				if (posy + 5 <= 0) posy = config.getScreenHeight() - 1;
-				if (posy >= config.getScreenHeight()) posy = -4;
+				if (posx + width <= 0) posx = config.getScreenWidth() - 1;
+				if (posx >= config.getScreenWidth()) posx = -(width-1);
+				if (posy + height <= 0) posy = config.getScreenHeight() - 1;
+				if (posy >= config.getScreenHeight()) posy = -(height-1);
 			}
 			
 			@Override
@@ -62,9 +63,19 @@ public class CollisionDemoLayer extends LayerImpl {
 			}
 		};
 		
-		obj.setTexture((SpriteAsset) am.load("rock", "assets/images/rock.png"));
-		Rectangle[] bboxes = {new Rectangle(0,0,15,14)};
-		obj.setCollisionBoxes(bboxes);
+		double minScale = 0.8, maxScale = 1.2;
+		
+//		obj.setTexture((SpriteAsset) am.load("rock", "assets/images/rock.png"));
+		SpriteAsset[] animArr = am.loadSpriteSheet("asteroid_sgeet", "assets/spritesheets/asteroid.png", 64, 8, 8);
+		obj.setSpriteArr(animArr);
+		if (animArr != null && animArr.length > 0) {
+			Rectangle[] bboxes = {new Rectangle(10,4,animArr[0].getImage().getWidth(null) - 14, animArr[0].getImage().getHeight(null) - 20)};
+			obj.setCollisionBoxes(bboxes);
+			obj.setWidth(animArr[0].getImage().getWidth(null));
+			obj.setHeight(animArr[0].getImage().getHeight(null));
+		}
+		obj.setStartIndex(r.nextInt(animArr.length));
+		obj.scale(minScale + (r.nextDouble() * (maxScale - minScale)));
 		obj.setPosition(r.nextDouble() * configuration.getScreenWidth(), r.nextDouble() * configuration.getScreenHeight());
 		
 		return obj;

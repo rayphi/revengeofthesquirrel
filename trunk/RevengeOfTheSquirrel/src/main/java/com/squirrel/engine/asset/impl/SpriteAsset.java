@@ -38,4 +38,8 @@ public class SpriteAsset extends Asset {
 	public Image getImage() {
 		return image;
 	}
+	
+	public void scale(double scale) {
+		this.image = image.getScaledInstance((int)(image.getWidth(null) * scale), (int)(image.getHeight(null) * scale), Image.SCALE_DEFAULT);
+	}
 }

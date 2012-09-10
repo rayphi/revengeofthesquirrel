@@ -19,6 +19,8 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 
 	protected Rectangle[] collisionBoxes;
 	protected SpriteAsset texture;
+	protected int width;
+	protected int height;
 	
 	private GameManager gm;
 	
@@ -108,5 +110,45 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 
 	public void setTexture(SpriteAsset texture) {
 		this.texture = texture;
+	}
+	
+	public void scale(double scale) {
+		scaleTexture(scale);
+		
+		scaleSize(scale);
+		
+		scaleBoundingBoxes(scale);
+	}
+
+	protected void scaleSize(double scale) {
+		width *= scale;
+		height *= scale;
+	}
+
+	protected void scaleTexture(double scale) {
+		texture.scale(scale);
+	}
+
+	protected void scaleBoundingBoxes(double scale) {
+		for (Rectangle r : collisionBoxes) {
+			r.setLocation((int)(r.x * scale), (int)(r.y * scale));
+			r.setSize((int)(r.width * scale), (int)(r.height * scale));
+		}
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }

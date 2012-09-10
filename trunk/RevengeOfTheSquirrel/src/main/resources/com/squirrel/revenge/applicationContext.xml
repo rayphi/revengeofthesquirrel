@@ -40,6 +40,6 @@
 	<bean id="sceneFactory" class="com.squirrel.engine.scene.impl.SceneFactoryImpl" scope="singleton" />
 	<bean id="performanceStatistics" class="com.squirrel.engine.statistics.PerformanceStatistics" scope="singleton" />
 	<bean id="gameManager" class="com.squirrel.engine.game.GameManager" scope="singleton" >
-		<property name="debug" value="true" />
+		<property name="debug" value="false" />
 	</bean>
 </beans>
