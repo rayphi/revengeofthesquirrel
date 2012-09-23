@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+	<!-- In dieser Datei werden alle log4j Konfigurationen vorgenommen -->
+
+	<!-- Konfiguration der Engine -->
+	<appender name="engineRFA" class="org.apache.log4j.RollingFileAppender">
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="file" value="logs/engine.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} %-5p [%t] %c: %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Konfiguration des Spieles -->
+	<appender name="revengeRFA" class="org.apache.log4j.RollingFileAppender">
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="file" value="logs/revenge.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} %-5p [%t] %c: %m%n" />
+		</layout>
+	</appender> 
+	
+	<!-- Konfiguration des Main Appenders -->
+	<appender name="mainRFA" class="org.apache.log4j.RollingFileAppender">
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="file" value="logs/main.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} %-5p [%t] %c: %m%n" />
+		</layout>
+	</appender> 
+
+	<!-- Der Standard ConsoleAppender -->
+	<appender name="CA" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} %-5p [%t] %c: %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="com.squirrel.engine">
+		<level value="DEBUG" />
+		<appender-ref ref="engineRFA"></appender-ref>
+	</logger>
+
+	<logger name="com.squirrel.revenge">
+		<level value="DEBUG" />
+		<appender-ref ref="revengeRFA"></appender-ref>
+	</logger>
+
+	<!-- Spring -->
+	<logger name="org.springframework">
+		<level value="INFO" />
+	</logger>
+	
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="CA" />
+		<appender-ref ref="mainRFA"></appender-ref>
+	</root>
+
+</log4j:configuration>
