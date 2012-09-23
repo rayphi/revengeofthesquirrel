@@ -42,7 +42,7 @@ public interface Layer {
 	 * Entfernt das Ÿbergebene {@link GameObject} aus dem Layer
 	 * @param obj
 	 */
-	void removeGameObject(GameObject obj);
+	void removeGameObjectAtUpdate(GameObject obj);
 
 	/**
 	 * invoked das update aller updateable GameObjects

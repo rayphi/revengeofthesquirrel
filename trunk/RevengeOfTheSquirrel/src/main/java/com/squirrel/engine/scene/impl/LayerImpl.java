@@ -19,30 +19,59 @@ import com.squirrel.engine.utils.ApplicationUtils;
  */
 public class LayerImpl implements Layer{
 
+	/**
+	 * Der Name des Layer
+	 */
 	protected String name;
+	/**
+	 * Alle {@link GameObject}s die sich auf diesem Layer befinden
+	 */
 	protected Set<GameObject> content;
-	protected Set<GameObject> removeObjects;
+	/**
+	 * Alle {@link GameObject}s die beim nächsten Update des Layer entfernt werden sollen
+	 */
+	protected Set<GameObject> removeAtUpdate;
+	/**
+	 * Alle {@link GameObject}s die beim nächsten Update des Layer hinzugefügt werden sollen
+	 */
 	protected Set<GameObject> addAtUpdate;
 	
+	/**
+	 * Eine Referenz auf die {@link PerformanceStatistics}
+	 */
 	protected PerformanceStatistics ps;
+	/**
+	 * Eine Referenz auf den {@link GameManager}
+	 */
 	protected GameManager gm;
 	
+	/**
+	 * Initialisiert den Layer
+	 * 
+	 * @param name
+	 */
 	public LayerImpl(String name) {
 		this.name = name;
 		content = new HashSet<GameObject>();
-		removeObjects = new HashSet<GameObject>();
+		removeAtUpdate = new HashSet<GameObject>();
 		addAtUpdate = new HashSet<GameObject>();
 		
+		// die PerformanceStatistics aus dem Kontext laden
 		ps = (PerformanceStatistics) ApplicationUtils.getInstance().getBean("performanceStatistics");
+		// den GameManager aus dem Kontext laden
 		gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 	}
 	
+	/**
+	 * Den Namen des Layer zurückgeben
+	 */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * Fügt ein GameObject der ungeordneten Liste hinzu
+	 * Fügt ein {@link GameObject} der ungeordneten Liste hinzu
+	 * 
 	 * @param obj
 	 */
 	public void addGameObject(GameObject obj) {
@@ -66,8 +95,8 @@ public class LayerImpl implements Layer{
 	public void update() {
 		// bevor die GameObjects selbst geupdated werden wird erst der Layer
 		// aktualisiert
-		content.removeAll(removeObjects);
-		removeObjects.clear();
+		content.removeAll(removeAtUpdate);
+		removeAtUpdate.clear();
 		
 		content.addAll(addAtUpdate);
 		addAtUpdate.clear();
@@ -88,22 +117,23 @@ public class LayerImpl implements Layer{
 	@Override
 	public void collisionCheck(Collidable c) {
 		for (GameObject gObj1 : content) {
+			// Prüft, ob das betrachtete GameObject ein Collidable ist
 			if (gObj1 instanceof Collidable) {
-					if (gObj1 != c)
-						((Collidable) gObj1).collisionCheck(c);
+				if (gObj1 != c) {
+					((Collidable) gObj1).collisionCheck(c);
+				}
 			}
 		}
 	}
 
 	@Override
-	public void removeGameObject(GameObject obj) {
-		removeObjects.add(obj);
+	public void removeGameObjectAtUpdate(GameObject obj) {
+		removeAtUpdate.add(obj);
 	}
 
 	@Override
 	public void addGameObjectAtUpdate(GameObject obj) {
 		addAtUpdate.add(obj);
 	}
-	
 	
 }

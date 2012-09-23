@@ -8,10 +8,15 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.GameObject;
-import com.squirrel.engine.gameobject.impl.AnimatedPhysicalGameObject;
-import com.squirrel.engine.gameobject.impl.PhysicalGameObject;
+import com.squirrel.engine.gameobject.impl.AnimatedSimplePhysicalGameObject;
 import com.squirrel.engine.utils.ApplicationUtils;
 
+/**
+ * 
+ * 
+ * @author Shane
+ *
+ */
 public class AnimatedCollisionDemoLayer extends LayerImpl {
 
 	private int numberTargets;
@@ -35,8 +40,8 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		final Configuration configuration = (Configuration) ApplicationUtils.getInstance().getBean("configuration");;
 		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
 		
-		AnimatedPhysicalGameObject obj = new AnimatedPhysicalGameObject(id, this){
-			private double maxSpeed = 50;
+		AnimatedSimplePhysicalGameObject obj = new AnimatedSimplePhysicalGameObject(id, this){
+			private double maxSpeed = 100;
 			private double speed_x = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private double speed_y = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private Configuration config = configuration;
@@ -58,7 +63,7 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 			@Override
 			public void onCollision(CollisionEvent cevt) {
 				super.onCollision(cevt);
-				removeGameObject(this);
+				removeGameObjectAtUpdate(this);
 				addGameObjectAtUpdate(generateObj(identifier));
 			}
 		};

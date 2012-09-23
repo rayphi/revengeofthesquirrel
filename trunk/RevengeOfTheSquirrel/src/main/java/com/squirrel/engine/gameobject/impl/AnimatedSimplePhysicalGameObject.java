@@ -4,12 +4,12 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.scene.Layer;
 
 /**
- * Repräsentiert ein animiertes {@link PhysicalGameObject}
+ * Repräsentiert ein animiertes {@link SimplePhysicalGameObject}
  * 
  * @author Shane
  *
  */
-public class AnimatedPhysicalGameObject extends PhysicalGameObject {
+public class AnimatedSimplePhysicalGameObject extends SimplePhysicalGameObject {
 
 	/**
 	 * Das sortierte Array mit den Einzelbildern der Animation
@@ -25,7 +25,7 @@ public class AnimatedPhysicalGameObject extends PhysicalGameObject {
 	private long lastSwitch = System.currentTimeMillis();
 	private int nextImage = 0;
 	
-	public AnimatedPhysicalGameObject(String identifier, Layer parent) {
+	public AnimatedSimplePhysicalGameObject(String identifier, Layer parent) {
 		super(identifier, parent);
 	}
 	

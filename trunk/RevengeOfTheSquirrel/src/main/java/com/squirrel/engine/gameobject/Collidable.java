@@ -15,6 +15,7 @@ public interface Collidable {
 
 	/**
 	 * Prüft, ob die beiden GameObjects miteinander Kollidieren
+	 * 
 	 * @param c
 	 * @return
 	 */
@@ -22,6 +23,7 @@ public interface Collidable {
 	
 	/**
 	 * Gibt die Boundingboxes zurück (möglicherweise mehrere)
+	 * 
 	 * @return
 	 */
 	Rectangle[] getCollisionBoxes();
@@ -29,10 +31,23 @@ public interface Collidable {
 	/**
 	 * Wird ausgelöst, wenn dieses GameObject mit einem
 	 * anderen GameObject kollidiert
+	 * 
 	 * @param cevt
 	 */
 	void onCollision(CollisionEvent cevt);
 	
+	/**
+	 * Gibt die x-Koordinate der Position des Objektes zurück
+	 * 
+	 * @return
+	 */
 	double getPosx();
+	
+	/**
+	 * 
+	 * Gibt die y-Koordinate der Position des Objektes zurück
+	 * 
+	 * @return
+	 */
 	double getPosy();
 }

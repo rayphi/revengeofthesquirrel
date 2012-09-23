@@ -14,24 +14,55 @@ import com.squirrel.engine.gameobject.Updateable;
 import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.utils.ApplicationUtils;
 
-public class PhysicalGameObject extends GameObject implements Collidable,
-		Drawable, Updateable {
+/**
+ * Ein {@link Collidable}, {@link Drawable} und {@link Updateable} {@link GameObject}
+ * 
+ * Hierbei handelt es sich um eine simple implementierung, welche eine Textur und ein
+ * Array von Boundingboxes erlaubt.
+ * 
+ * @author Shane
+ *
+ */
+public class SimplePhysicalGameObject extends GameObject implements 	Collidable,
+																		Drawable, 
+																		Updateable {
 
+	/**
+	 * Die Boundingboxes
+	 */
 	protected Rectangle[] collisionBoxes;
+	/**
+	 * Die Textur für dieses {@link GameObject}
+	 */
 	protected SpriteAsset texture;
+	/**
+	 * Die Breite des {@link GameObject}
+	 */
 	protected int width;
+	/**
+	 * Die Höhe des {@link GameObject}
+	 */
 	protected int height;
 	
+	/**
+	 * Eine Referenz auf den {@link GameManager}
+	 */
 	private GameManager gm;
 	
-	public PhysicalGameObject(String identifier, Layer parent) {
+	/**
+	 * Der Konstruktor initialisiert das {@link SimplePhysicalGameObject}
+	 * 
+	 * @param identifier
+	 * @param parent
+	 */
+	public SimplePhysicalGameObject(String identifier, Layer parent) {
 		super(identifier, parent);
 		
 		gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 	}
 
 	/**
-	 * Anstelle dieser Methode bitte die customUpdate()
+	 * Anstelle dieser Methode bitte die customUpdate() überschreiben
 	 */
 	@Override
 	public void update() {
@@ -103,16 +134,33 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 		this.collisionBoxes = collisionBoxes;
 	}
 
+	/**
+	 * Die Position des {@link SimplePhysicalGameObject} setzen
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void setPosition(double x, double y) {
 		this.posx = x;
 		this.posy = y;
 	}
 
+	/**
+	 * Di Textur des {@link SimplePhysicalGameObject} setzen
+	 * 
+	 * @param texture
+	 */
 	public void setTexture(SpriteAsset texture) {
 		this.texture = texture;
 	}
 	
+	/**
+	 * Skaliert das {@link GameObject} entsprechend dem übergebenen Wert
+	 * 
+	 * @param scale
+	 */
 	public void scale(double scale) {
+		
 		scaleTexture(scale);
 		
 		scaleSize(scale);
@@ -120,15 +168,30 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 		scaleBoundingBoxes(scale);
 	}
 
+	/**
+	 * Skaliert die Breiten und Höhen Angaben des {@link SimplePhysicalGameObject}
+	 * 
+	 * @param scale
+	 */
 	protected void scaleSize(double scale) {
 		width *= scale;
 		height *= scale;
 	}
 
+	/**
+	 * Skaliert die Textur des {@link SimplePhysicalGameObject}
+	 * 
+	 * @param scale
+	 */
 	protected void scaleTexture(double scale) {
 		texture.scale(scale);
 	}
 
+	/**
+	 * Die Boundingboxes des {@link SimplePhysicalGameObject} skalieren
+	 * 
+	 * @param scale
+	 */
 	protected void scaleBoundingBoxes(double scale) {
 		for (Rectangle r : collisionBoxes) {
 			r.setLocation((int)(r.x * scale), (int)(r.y * scale));
@@ -136,18 +199,38 @@ public class PhysicalGameObject extends GameObject implements Collidable,
 		}
 	}
 
+	/**
+	 * gibt die Breitenangabe des {@link SimplePhysicalGameObject} zurück
+	 * 
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Setzt die Breitenangabe des {@link SimplePhysicalGameObject}
+	 * 
+	 * @param width
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
+	/**
+	 * Gibt die Höhenangabe des {@link SimplePhysicalGameObject} zurück
+	 * 
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Setzt die Höhenangabe des {@link SimplePhysicalGameObject}
+	 * 
+	 * @param height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
