@@ -32,6 +32,7 @@ public interface AssetManager {
 	/**
 	 * LŠdt ein sortiertes und symmetrisches sprite sheet und erzeugt ein 
 	 * Array aus den Einzelbildern
+	 * 
 	 * @param id
 	 * @param path
 	 * @param numSprites

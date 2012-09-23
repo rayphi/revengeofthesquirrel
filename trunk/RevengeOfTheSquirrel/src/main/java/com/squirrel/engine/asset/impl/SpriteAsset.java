@@ -33,12 +33,18 @@ public class SpriteAsset extends Asset {
 	
 	/**
 	 * Gibt das Image zurück
+	 * 
 	 * @return
 	 */
 	public Image getImage() {
 		return image;
 	}
 	
+	/**
+	 * Skaliert das Sprite
+	 * 
+	 * @param scale
+	 */
 	public void scale(double scale) {
 		this.image = image.getScaledInstance((int)(image.getWidth(null) * scale), (int)(image.getHeight(null) * scale), Image.SCALE_DEFAULT);
 	}
