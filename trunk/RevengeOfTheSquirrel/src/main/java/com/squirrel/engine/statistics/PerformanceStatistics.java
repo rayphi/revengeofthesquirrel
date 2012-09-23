@@ -2,6 +2,7 @@ package com.squirrel.engine.statistics;
 
 /**
  * Erfasst Daten zur Analyse der Performance
+ * 
  * @author Shane
  *
  */

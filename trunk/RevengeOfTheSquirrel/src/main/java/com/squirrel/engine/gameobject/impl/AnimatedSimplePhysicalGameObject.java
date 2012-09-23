@@ -76,6 +76,11 @@ public class AnimatedSimplePhysicalGameObject extends SimplePhysicalGameObject {
 		this.frequency = frequency;
 	}
 	
+	/**
+	 * Setzt den Index der Animationsserie bei dem die Animation beginnen soll.
+	 * 
+	 * @param startIndex
+	 */
 	public void setStartIndex(int startIndex) {
 		nextImage = startIndex >= 0 && startIndex < spriteArr.length ? startIndex : 0;
 		changeImage();
