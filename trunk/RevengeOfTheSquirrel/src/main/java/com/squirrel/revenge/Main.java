@@ -11,6 +11,7 @@ import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.scene.impl.AnimatedCollisionDemoLayer;
 import com.squirrel.engine.utils.ApplicationUtils;
+import com.squirrel.revenge.layer.BackgroundLayer;
 import com.squirrel.revenge.layer.HUDLayer;
 
 
@@ -55,7 +56,7 @@ public class Main {
 		// TODO rausnehmen, nur zu demo zwecken
 		currentScene.addLayer(0, new HUDLayer());
 		currentScene.addLayer(0, new AnimatedCollisionDemoLayer(10));
-		
+		currentScene.addLayer(0, new BackgroundLayer());
 		// Dem GameManager sagen, er soll das Spiel starten
 		gm.start();
 	}
