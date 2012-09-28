@@ -23,7 +23,7 @@ public interface Scene {
 	 * @param priority
 	 * @param layer
 	 */
-	void addLayer(int priority, Layer layer);
+	void addLayer(Layer layer);
 	
 	/**
 	 * Ein GameObject einem expliziten {@link Layer} hinzufügen

@@ -20,6 +20,17 @@ public interface Layer {
 	String getName();
 	
 	/**
+	 * Gibt die Priorität des Layer zurück
+	 * @return
+	 */
+	long getPriority();
+	
+	/**
+	 * setzt die Priorität des Layer
+	 */
+	void setPriority(long prio);
+	
+	/**
 	 * Stößt das zeichnen aller enthaltenen GameObjects an
 	 * @param g
 	 */

@@ -24,6 +24,11 @@ public class LayerImpl implements Layer{
 	 */
 	protected String name;
 	/**
+	 * Die Priorität des Layer
+	 */
+	protected long priority;
+
+	/**
 	 * Alle {@link GameObject}s die sich auf diesem Layer befinden
 	 */
 	protected Set<GameObject> content;
@@ -136,4 +141,12 @@ public class LayerImpl implements Layer{
 		addAtUpdate.add(obj);
 	}
 	
+
+	public long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(long priority) {
+		this.priority = priority;
+	}
 }

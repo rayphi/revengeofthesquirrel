@@ -53,8 +53,8 @@ public class Main {
 		gm.setGraphics(gamePanel.getGraphics());
 		
 		// TODO rausnehmen, nur zu demo zwecken
-		currentScene.addLayer(0, new HUDLayer());
-		currentScene.addLayer(0, new AnimatedCollisionDemoLayer(10));
+		currentScene.addLayer(new HUDLayer());
+		currentScene.addLayer(new AnimatedCollisionDemoLayer(10));
 		
 		// Dem GameManager sagen, er soll das Spiel starten
 		gm.start();
