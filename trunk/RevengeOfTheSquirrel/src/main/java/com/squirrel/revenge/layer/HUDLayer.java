@@ -13,6 +13,7 @@ public class HUDLayer extends LayerImpl {
 	public HUDLayer() {
 		super("HUD");
 	
+		setPriority(10000);
 		
 		if (gm.isDebug())
 			initDebugHUD();

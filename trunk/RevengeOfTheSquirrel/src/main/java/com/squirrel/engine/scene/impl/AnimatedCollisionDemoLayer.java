@@ -24,6 +24,9 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 	
 	public AnimatedCollisionDemoLayer(int count) {
 		super("CollisionDemo");
+		
+		setPriority(100);
+		
 		numberTargets = count;
 		r = new Random(System.currentTimeMillis());
 		
