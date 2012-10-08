@@ -35,28 +35,32 @@ public class Main {
 		// Die Configuration aus dem Context laden
 		Configuration config = (Configuration) ApplicationUtils.getInstance().getBean("configuration");
 		
+		// Die aktuelle Szene holen
 		Scene currentScene = sf.getCurrentScene();
 		
-		// Ein Panel erzeugen, auf dem wir das Spiel zeihnen werden
-		JPanel gamePanel = new JPanel(true);
-		gamePanel.setSize(config.getScreenWidth(), config.getScreenHeight());
-		
-		// Einen Frame erzeugen, der das Panel enthalten soll
-		JFrame frame = new JFrame();
-		frame.setSize(config.getScreenWidth(), config.getScreenHeight() + frame.getInsets().top);
-		frame.setTitle("Bitch, please..." + (gm.isDebug() ? "(DEBUG)" : ""));
-		frame.add(gamePanel);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Das Graphicsobjekt des Panel dem Gamemanager Ÿbergeben
-		gm.setGraphics(gamePanel.getGraphics());
+		{ // TODO Dieser Code soll durch die Engine selber durchgefÃ¼hrt werden
+			// Ein Panel erzeugen, auf dem wir das Spiel zeihnen werden
+			JPanel gamePanel = new JPanel(true);
+			gamePanel.setSize(config.getScreenWidth(), config.getScreenHeight());
+			
+			// Einen Frame erzeugen, der das Panel enthalten soll
+			JFrame frame = new JFrame();
+			frame.setSize(config.getScreenWidth(), config.getScreenHeight() + frame.getInsets().top);
+			frame.setTitle("Bitch, please..." + (gm.isDebug() ? "(DEBUG)" : ""));
+			frame.add(gamePanel);
+			frame.setResizable(false);
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+			// Das Graphicsobjekt des Panel dem Gamemanager ï¿½bergeben
+			gm.setGraphics(gamePanel.getGraphics());
+		}
 		
 		// TODO rausnehmen, nur zu demo zwecken
 		currentScene.addLayer(new HUDLayer());
 		currentScene.addLayer(new AnimatedCollisionDemoLayer(10));
 		currentScene.addLayer(new BackgroundLayer());
+		
 		// Dem GameManager sagen, er soll das Spiel starten
 		gm.start();
 	}
