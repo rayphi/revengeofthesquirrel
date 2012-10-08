@@ -2,6 +2,7 @@ package com.squirrel.engine.io;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -17,6 +18,10 @@ public class InputManager {
 	private static Logger logger = Logger.getLogger(InputManager.class);
 	
 	private Map<Integer, KeyHandler> keyMap;
+	
+	public InputManager() {
+		keyMap = new HashMap<Integer, KeyHandler>(); 
+	}
 	
 	/**
 	 * Stellt eine Bridge für Key-Eingaben auf Basis eines {@link KeyListener} zur Verfügung
