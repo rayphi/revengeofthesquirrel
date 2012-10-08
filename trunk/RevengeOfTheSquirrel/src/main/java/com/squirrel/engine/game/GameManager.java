@@ -19,6 +19,7 @@ public class GameManager {
 	private Graphics g;
 	private BufferedImage buffer;
 	private boolean running;
+	private boolean paused;
 	@Autowired PerformanceStatistics ps;
 	@Autowired SceneFactory sf;
 	@Autowired Configuration config;
@@ -26,6 +27,7 @@ public class GameManager {
 	public GameManager() {
 		this.g = null;
 		running = true;
+		paused = false;
 	}
 
 	/**
@@ -35,7 +37,7 @@ public class GameManager {
 	 */
 	public void start() {
 		// TODO initGame
-		// TODO MenŸ
+		// TODO Menï¿½
 		
 		// Die Spielschleife starten
 		gameLoop();
@@ -46,20 +48,28 @@ public class GameManager {
 		ps.init();
 		
 		while (running) {
-			// TODO process input
+			while (paused) {
+				// TODO Pausenbildschirm etc...
+			}
 			
-			// update all updateables
-			sf.getCurrentScene().update();
-			
-			// Frame zeichnen (doublebuffered)
-			buffer = new BufferedImage(config.getScreenWidth(), config.getScreenHeight(), BufferedImage.TYPE_3BYTE_BGR);
-			sf.getCurrentScene().draw(buffer.getGraphics());
-			g.drawImage(buffer, 0, 0, null);			
-			
-			// Frame zŠhlen
-			ps.countFrame();
+			while (!paused) {
+				// TODO process input
+				
+				// update all updateables
+				sf.getCurrentScene().update();
+				
+				// Frame zeichnen (doublebuffered)
+				buffer = new BufferedImage(config.getScreenWidth(), config.getScreenHeight(), BufferedImage.TYPE_3BYTE_BGR);
+				sf.getCurrentScene().draw(buffer.getGraphics());
+				g.drawImage(buffer, 0, 0, null);			
+				
+				// Frame zï¿½hlen
+				ps.countFrame();
+			}
 		}
 	}
+	
+	
 	
 	/**
 	 * Den Graphics Kontext setzen, in dem das Spiel ablaufen soll
@@ -78,10 +88,19 @@ public class GameManager {
 	}
 	
 	/**
-	 * Gibt zurŸck, ob sich das Spiel im Debug-Modus befindet
+	 * Gibt zurï¿½ck, ob sich das Spiel im Debug-Modus befindet
 	 * @return
 	 */
 	public boolean isDebug() {
 		return debug;
+	}
+	
+	/**
+	 * Pausiert/depausiert die Spielschleife.
+	 * 
+	 * Es kann nur von einem Modus in den anderen gewechselt werden.
+	 */
+	public void triggerPause() {
+		this.paused = !this.paused;
 	}
 }
