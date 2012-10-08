@@ -17,6 +17,8 @@ public class InputManager {
 	
 	private static Logger logger = Logger.getLogger(InputManager.class);
 	
+	public static final int DEFAULT = -1;
+	
 	private Map<Integer, KeyHandler> keyMap;
 	
 	public InputManager() {
@@ -38,7 +40,10 @@ public class InputManager {
 		if (keyMap.containsKey(keyCode)) {
 			KeyHandler handler = keyMap.get(keyCode);
 			// ..dem handler sagen, dass er gepressed wurde
-			handler.pressed();
+			handler.pressed(keyCode);
+		} else if (keyMap.containsKey(InputManager.DEFAULT)) {
+			KeyHandler handler = keyMap.get(InputManager.DEFAULT);
+			handler.pressed(keyCode);
 		}
 	}
 
@@ -49,24 +54,32 @@ public class InputManager {
 		if (keyMap.containsKey(keyCode)) {
 			KeyHandler handler = keyMap.get(keyCode);
 			// ..dem handler sagen, dass er getyped wurde
-			handler.typed();
+			handler.typed(keyCode);
+		} else if (keyMap.containsKey(InputManager.DEFAULT)) {
+			KeyHandler handler = keyMap.get(InputManager.DEFAULT);
+			handler.typed(keyCode);
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
 		Integer keyCode = e.getKeyCode();
-		
+
 		// Wenn ein handler für den keyCode definiert wurde...
 		if (keyMap.containsKey(keyCode)) {
 			KeyHandler handler = keyMap.get(keyCode);
 			// ..dem handler sagen, dass er released wurde
-			handler.released();
+			handler.released(keyCode);
+		} else if (keyMap.containsKey(InputManager.DEFAULT)) {
+			KeyHandler handler = keyMap.get(InputManager.DEFAULT);
+			handler.released(keyCode);
 		}
 	}
 	
 	/**
 	 * Über diese Methode kann ein {@link KeyHandler} für einen bestimmten keyCode
 	 * angemeldet werden.
+	 * 
+	 * Mit dem charCode {@link #DEFAULT} kann ein default keyHandler angemeldet werden.
 	 * 
 	 * @param keyCode
 	 * @param keyHandler
