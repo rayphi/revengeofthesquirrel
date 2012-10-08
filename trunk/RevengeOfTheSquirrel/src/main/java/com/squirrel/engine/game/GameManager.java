@@ -159,6 +159,10 @@ public class GameManager {
 	 * Es kann nur von einem Modus in den anderen gewechselt werden.
 	 */
 	public void triggerPause() {
+		if (paused) {
+			ps.compensateFPS();
+		}
+		
 		this.paused = !this.paused;
 	}
 }
