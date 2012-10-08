@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.squirrel.engine.io.InputManager;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.statistics.PerformanceStatistics;
 
@@ -27,6 +28,7 @@ public class GameManager {
 	@Autowired PerformanceStatistics ps;
 	@Autowired SceneFactory sf;
 	@Autowired Configuration config;
+	@Autowired InputManager im;
 
 	private JFrame frame;
 	private JPanel gamePanel;
@@ -76,7 +78,8 @@ public class GameManager {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-		// TODO Listener anmelden
+		// KeyListener anmelden
+		frame.addKeyListener(im.createKeyListener());
 
 		// Das Graphicsobjekt des Panel merken
 		g = gamePanel.getGraphics();

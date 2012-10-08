@@ -1,11 +1,76 @@
 package com.squirrel.engine.io;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
 /**
- * Diese Klasse k웟mert sich um die Verarbeitung von Benutzereingaben
+ * Diese Klasse k체mmert sich um die Verarbeitung von Benutzereingaben
  * 
  * @author Shane
  *
  */
 public class InputManager {
+	
+	private static Logger logger = Logger.getLogger(InputManager.class);
+	
+	private Map<Integer, KeyHandler> keyMap;
+	
+	/**
+	 * Stellt eine Bridge f체r Key-Eingaben auf Basis eines {@link KeyListener} zur Verf체gung
+	 * @return
+	 */
+	public KeyListener createKeyListener() {
+		return new InputManagerKeyBridge(this);
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		Integer keyCode = e.getKeyCode();
+		
+		// Wenn ein handler f체r den keyCode definiert wurde...
+		if (keyMap.containsKey(keyCode)) {
+			KeyHandler handler = keyMap.get(keyCode);
+			// ..dem handler sagen, dass er gepressed wurde
+			handler.pressed();
+		}
+	}
 
+	public void keyTyped(KeyEvent e) {
+		Integer keyCode = e.getKeyCode();
+		
+		// Wenn ein handler f체r den keyCode definiert wurde...
+		if (keyMap.containsKey(keyCode)) {
+			KeyHandler handler = keyMap.get(keyCode);
+			// ..dem handler sagen, dass er getyped wurde
+			handler.typed();
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		Integer keyCode = e.getKeyCode();
+		
+		// Wenn ein handler f체r den keyCode definiert wurde...
+		if (keyMap.containsKey(keyCode)) {
+			KeyHandler handler = keyMap.get(keyCode);
+			// ..dem handler sagen, dass er released wurde
+			handler.released();
+		}
+	}
+	
+	/**
+	 * 횥ber diese Methode kann ein {@link KeyHandler} f체r einen bestimmten keyCode
+	 * angemeldet werden.
+	 * 
+	 * @param keyCode
+	 * @param keyHandler
+	 */
+	public void addKeyMapping(Integer keyCode, KeyHandler keyHandler) {
+		if (keyMap.containsKey(keyCode)) {
+			logger.warn("A keyHandler for keyCode " + keyCode + " allready exists. It will be overritten.");
+		}
+		
+		keyMap.put(keyCode, keyHandler);
+	}
 }

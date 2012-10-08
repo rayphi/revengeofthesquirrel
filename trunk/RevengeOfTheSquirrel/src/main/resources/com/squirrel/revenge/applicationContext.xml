@@ -42,4 +42,5 @@
 	<bean id="gameManager" class="com.squirrel.engine.game.GameManager" scope="singleton" >
 		<property name="debug" value="true" />
 	</bean>
+	<bean id="inputManager" class="com.squirrel.engine.io.InputManager" scope="singleton" />
 </beans>
