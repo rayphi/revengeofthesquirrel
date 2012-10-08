@@ -1,7 +1,7 @@
 package com.squirrel.engine.game;
 
 /**
- * EnthŠlt einige Konfigurationen zum SPiel
+ * Enthï¿½lt einige Konfigurationen zum SPiel
  * 
  * @author Shane
  *
@@ -10,13 +10,23 @@ public class Configuration {
 
 	protected int screenWidth;
 	protected int screenHeight;
-	
+	protected String title;
+
 	/**
 	 * der default Konstruktor initialisiert alle default werte
 	 */
 	public Configuration() {
 		screenWidth = 800;
 		screenHeight = 600;
+		title = "Bitch, please...";
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getScreenWidth() {

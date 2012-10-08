@@ -1,7 +1,4 @@
 package com.squirrel.revenge;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -35,31 +32,20 @@ public class Main {
 		// Die Configuration aus dem Context laden
 		Configuration config = (Configuration) ApplicationUtils.getInstance().getBean("configuration");
 		
-		// Die aktuelle Szene holen
-		Scene currentScene = sf.getCurrentScene();
-		
-		{ // TODO Dieser Code soll durch die Engine selber durchgeführt werden
-			// Ein Panel erzeugen, auf dem wir das Spiel zeihnen werden
-			JPanel gamePanel = new JPanel(true);
-			gamePanel.setSize(config.getScreenWidth(), config.getScreenHeight());
+		{ // Änderungen an der Konfiguration vornehmen
 			
-			// Einen Frame erzeugen, der das Panel enthalten soll
-			JFrame frame = new JFrame();
-			frame.setSize(config.getScreenWidth(), config.getScreenHeight() + frame.getInsets().top);
-			frame.setTitle("Bitch, please..." + (gm.isDebug() ? "(DEBUG)" : ""));
-			frame.add(gamePanel);
-			frame.setResizable(false);
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-			// Das Graphicsobjekt des Panel dem Gamemanager �bergeben
-			gm.setGraphics(gamePanel.getGraphics());
 		}
 		
+		// Die aktuelle Szene holen
+		Scene currentScene = sf.getCurrentScene();
+				
 		// TODO rausnehmen, nur zu demo zwecken
-		currentScene.addLayer(new HUDLayer());
 		currentScene.addLayer(new AnimatedCollisionDemoLayer(10));
-		currentScene.addLayer(new BackgroundLayer());
+		
+		{ // Layer des Spiels hinzufügen
+			currentScene.addLayer(new HUDLayer());
+			currentScene.addLayer(new BackgroundLayer());
+		}
 		
 		// Dem GameManager sagen, er soll das Spiel starten
 		gm.start();
