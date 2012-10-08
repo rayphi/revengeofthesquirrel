@@ -74,7 +74,7 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		double minScale = 0.8, maxScale = 1.2;
 		
 //		obj.setTexture((SpriteAsset) am.load("rock", "assets/images/rock.png"));
-		SpriteAsset[] animArr = am.loadSpriteSheet("asteroid_sgeet", "assets/spritesheets/asteroid.png", 64, 8, 8);
+		SpriteAsset[] animArr = am.loadSpriteSheet("asteroid_sheet", "assets/spritesheets/asteroid.png", 64, 8, 8);
 		obj.setSpriteArr(animArr);
 		if (animArr != null && animArr.length > 0) {
 			Rectangle[] bboxes = {new Rectangle(10,4,animArr[0].getImage().getWidth(null) - 14, animArr[0].getImage().getHeight(null) - 20)};

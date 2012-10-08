@@ -11,7 +11,7 @@ import com.squirrel.engine.scene.Layer;
 /**
  * Ein {@link Drawable} und {@link Updateable} {@link GameObject}
  * 
- * Dies reprŠsentiert explizit ein textuelles Object
+ * Dies reprï¿½sentiert explizit ein textuelles Object
  * 
  * @author Shane
  *
@@ -47,4 +47,7 @@ public class TextualGameObject extends GameObject implements Drawable, Updateabl
 	public void update() {
 	}
 
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 }

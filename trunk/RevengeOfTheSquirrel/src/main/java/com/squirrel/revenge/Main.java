@@ -11,6 +11,7 @@ import com.squirrel.engine.io.KeyHandler;
 import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.scene.impl.AnimatedCollisionDemoLayer;
+import com.squirrel.engine.scene.impl.SimpleKeyHandlerDemoLayer;
 import com.squirrel.engine.utils.ApplicationUtils;
 import com.squirrel.revenge.layer.BackgroundLayer;
 import com.squirrel.revenge.layer.HUDLayer;
@@ -47,6 +48,7 @@ public class Main {
 				
 		// TODO rausnehmen, nur zu demo zwecken
 		currentScene.addLayer(new AnimatedCollisionDemoLayer(10));
+		currentScene.addLayer(new SimpleKeyHandlerDemoLayer());
 		
 		{ // Layer des Spiels hinzufügen
 			currentScene.addLayer(new HUDLayer());
@@ -56,10 +58,15 @@ public class Main {
 		{ // keyMappings
 			// Pausen handler
 			im.addKeyMapping(KeyEvent.VK_P, new KeyHandler() {
-				@Override public void pressed() {  }
-				@Override public void typed() {  }
-				@Override 
-				public void released() {
+
+				@Override
+				public void pressed(Integer keyCode) { }
+
+				@Override
+				public void typed(Integer keyCode) { }
+
+				@Override
+				public void released(Integer keyCode) {
 					// Pause toggeln
 					GameManager gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 					gm.triggerPause();
