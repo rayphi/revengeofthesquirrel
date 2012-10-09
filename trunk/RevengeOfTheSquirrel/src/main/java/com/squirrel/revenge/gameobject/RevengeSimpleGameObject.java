@@ -1,5 +1,6 @@
 package com.squirrel.revenge.gameobject;
 
+import java.awt.Rectangle;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -38,6 +39,12 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 	 */
 	protected boolean grounded = false;
 	
+	protected boolean jumping = false;
+	
+	protected double jumpAdded = 0.0;
+	
+	protected double maxJumpHeight = 50.0;
+	
 	/**
 	 * Die aktuelle horizontale Geschwindigkeit.
 	 */
@@ -64,16 +71,33 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 		
 		if (c instanceof InvisibleWall) {
 			// Es gab eine collision mit einer Bande
-			logger.info("collided with instance of " + c.getClass().getCanonicalName());
 			
-			// TODO Seite bestimmen
-			// TODO wenn unten, dann grounded = true setzen
+			// TODO Wo liegt das andere Objekt? (drüber drunter...)
+			Rectangle bottom = new Rectangle((int)posx, (int)posy + height, width, 1);
+			// TODO wenn drunter, dann grounded = true setzen
+			if (c.collisionCheck(bottom)) {
+				grounded = true;
+				jumping = false;
+				if (movementVertical < 0) {
+					movementVertical = 0;
+				}
+			}
 			// TODO Auswirkung auf Bewegung bestimmen
+				// Wenn grounded, dann keine negative vertikale bewegung...
 		} else {
 			logger.info("collided with instance of " + c.getClass().getCanonicalName());
 		}
+		
+		customCollision(cevt);
 	}
 	
+	/**
+	 * Diese Methode kann überschrieben werden, wenn zusätzlich
+	 * zur standard onCollision weitere Aufgaben ausgeführt werden sollen.
+	 */
+	protected void customCollision(CollisionEvent cevt) {
+	}
+
 	@Override
 	public void customUpdate() {
 		calculateAnimation();
@@ -107,6 +131,15 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 			if (ps.getFPS() > 0)
 				movementVertical -= g / ps.getFPS();
 		}
+		
+		if (jumping) {
+			if (jumpAdded < maxJumpHeight) {
+				grounded = false;
+				double jumpFragment = (maxJumpHeight * acceleration) / ps.getFPS(); 
+				jumpAdded += jumpFragment;
+				movementVertical += jumpFragment;
+			}
+		}
 	}
 
 	/**
@@ -136,5 +169,9 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 		}
 		
 		animationMap.put(name, animation);
+	}
+
+	public void jump() {
+		jumping = true;
 	}
 }

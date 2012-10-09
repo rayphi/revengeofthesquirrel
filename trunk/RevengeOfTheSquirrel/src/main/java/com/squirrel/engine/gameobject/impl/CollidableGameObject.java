@@ -89,4 +89,15 @@ public class CollidableGameObject extends GameObject implements Collidable {
 			r.setSize((int)(r.width * scale), (int)(r.height * scale));
 		}
 	}
+
+	@Override
+	public boolean collisionCheck(Rectangle rect) {
+		for (Rectangle bb : collisionBoxes) {
+			Rectangle bbrect = new Rectangle(bb);
+			bbrect.translate((int) posx, (int) posy);
+			if (bbrect.intersects(rect))
+				return true;
+		}
+		return false;
+	}
 }

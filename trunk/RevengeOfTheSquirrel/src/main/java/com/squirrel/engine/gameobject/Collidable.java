@@ -6,7 +6,7 @@ import com.squirrel.engine.event.impl.CollisionEvent;
 
 /**
  * Beschreibt, dass das entsprechende {@link GameObject} Physicalisch greifbar ist,
- * also berŸhrt werden kann.
+ * also berï¿½hrt werden kann.
  * 
  * @author Shane
  *
@@ -14,7 +14,7 @@ import com.squirrel.engine.event.impl.CollisionEvent;
 public interface Collidable {
 
 	/**
-	 * PrŸft, ob die beiden GameObjects miteinander Kollidieren
+	 * Prï¿½ft, ob die beiden GameObjects miteinander Kollidieren
 	 * 
 	 * @param c
 	 * @return
@@ -22,14 +22,22 @@ public interface Collidable {
 	boolean collisionCheck(Collidable c);
 	
 	/**
-	 * Gibt die Boundingboxes zurŸck (mšglicherweise mehrere)
+	 * PrÃ¼ft eine Kollision mit dem einzelnen Rechteck
+	 * 
+	 * @param rect
+	 * @return
+	 */
+	boolean collisionCheck(Rectangle rect);
+	
+	/**
+	 * Gibt die Boundingboxes zurï¿½ck (mï¿½glicherweise mehrere)
 	 * 
 	 * @return
 	 */
 	Rectangle[] getCollisionBoxes();
 	
 	/**
-	 * Wird ausgelšst, wenn dieses GameObject mit einem
+	 * Wird ausgelï¿½st, wenn dieses GameObject mit einem
 	 * anderen GameObject kollidiert
 	 * 
 	 * @param cevt
@@ -37,7 +45,7 @@ public interface Collidable {
 	void onCollision(CollisionEvent cevt);
 	
 	/**
-	 * Gibt die x-Koordinate der Position des Objektes zurŸck
+	 * Gibt die x-Koordinate der Position des Objektes zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -45,7 +53,7 @@ public interface Collidable {
 	
 	/**
 	 * 
-	 * Gibt die y-Koordinate der Position des Objektes zurŸck
+	 * Gibt die y-Koordinate der Position des Objektes zurï¿½ck
 	 * 
 	 * @return
 	 */

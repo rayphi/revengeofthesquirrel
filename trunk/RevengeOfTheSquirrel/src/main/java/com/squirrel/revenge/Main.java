@@ -15,6 +15,7 @@ import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.scene.impl.AnimatedCollisionDemoLayer;
+import com.squirrel.engine.scene.impl.SceneFactoryImpl;
 import com.squirrel.engine.scene.impl.SimpleKeyHandlerDemoLayer;
 import com.squirrel.engine.utils.ApplicationUtils;
 import com.squirrel.revenge.gameobject.InvisibleWall;
@@ -58,7 +59,7 @@ public class Main {
 		currentScene.addLayer(skhdl);
 		
 		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
-		RevengeSimpleGameObject rsgo = new RevengeSimpleGameObject("testRSGO", skhdl);
+		final RevengeSimpleGameObject rsgo = new RevengeSimpleGameObject("testRSGO", skhdl);
 		SpriteAsset[] animArr = am.loadSpriteSheet("asteroid_sheet", "assets/spritesheets/asteroid.png", 64, 8, 8);
 		rsgo.setSpriteArr(animArr);
 		if (animArr != null && animArr.length > 0) {
@@ -68,6 +69,19 @@ public class Main {
 		}
 		rsgo.setPosition(200, 100);
 		skhdl.addGameObject(rsgo);
+		im.addKeyMapping(KeyEvent.VK_SPACE, new KeyHandler() {
+			@Override
+			public void pressed(Integer keyCode) {
+				rsgo.jump();
+			}
+			@Override
+			public void typed(Integer keyCode) {
+			}
+			@Override
+			public void released(Integer keyCode) {
+			}
+		});
+		
 		
 		InvisibleWall iw = new InvisibleWall("wall", skhdl);
 		iw.setPosition(100, 250);
