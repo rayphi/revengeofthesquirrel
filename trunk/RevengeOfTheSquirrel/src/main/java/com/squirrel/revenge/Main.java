@@ -1,18 +1,24 @@
 package com.squirrel.revenge;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.squirrel.engine.asset.AssetManager;
+import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.game.GameManager;
 import com.squirrel.engine.io.InputManager;
 import com.squirrel.engine.io.KeyHandler;
+import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.scene.impl.AnimatedCollisionDemoLayer;
 import com.squirrel.engine.scene.impl.SimpleKeyHandlerDemoLayer;
 import com.squirrel.engine.utils.ApplicationUtils;
+import com.squirrel.revenge.gameobject.InvisibleWall;
+import com.squirrel.revenge.gameobject.RevengeSimpleGameObject;
 import com.squirrel.revenge.layer.BackgroundLayer;
 import com.squirrel.revenge.layer.HUDLayer;
 
@@ -48,7 +54,25 @@ public class Main {
 				
 		// TODO rausnehmen, nur zu demo zwecken
 		currentScene.addLayer(new AnimatedCollisionDemoLayer(10));
-		currentScene.addLayer(new SimpleKeyHandlerDemoLayer());
+		Layer skhdl = new SimpleKeyHandlerDemoLayer();
+		currentScene.addLayer(skhdl);
+		
+		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
+		RevengeSimpleGameObject rsgo = new RevengeSimpleGameObject("testRSGO", skhdl);
+		SpriteAsset[] animArr = am.loadSpriteSheet("asteroid_sheet", "assets/spritesheets/asteroid.png", 64, 8, 8);
+		rsgo.setSpriteArr(animArr);
+		if (animArr != null && animArr.length > 0) {
+			Rectangle[] bboxes = {new Rectangle(10,4,animArr[0].getImage().getWidth(null) - 14, animArr[0].getImage().getHeight(null) - 20)};
+			rsgo.setCollisionBoxes(bboxes);
+			rsgo.setDimension(animArr[0].getImage().getWidth(null), animArr[0].getImage().getHeight(null));
+		}
+		rsgo.setPosition(200, 100);
+		skhdl.addGameObject(rsgo);
+		
+		InvisibleWall iw = new InvisibleWall("wall", skhdl);
+		iw.setPosition(100, 250);
+		iw.setDimension(300, 20);
+		skhdl.addGameObject(iw);
 		
 		{ // Layer des Spiels hinzufügen
 			currentScene.addLayer(new HUDLayer());

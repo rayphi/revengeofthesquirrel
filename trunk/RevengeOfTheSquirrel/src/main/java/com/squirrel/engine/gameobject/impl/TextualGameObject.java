@@ -11,7 +11,7 @@ import com.squirrel.engine.scene.Layer;
 /**
  * Ein {@link Drawable} und {@link Updateable} {@link GameObject}
  * 
- * Dies repr�sentiert explizit ein textuelles Object
+ * Dies repräsentiert explizit ein textuelles Object
  * 
  * @author Shane
  *

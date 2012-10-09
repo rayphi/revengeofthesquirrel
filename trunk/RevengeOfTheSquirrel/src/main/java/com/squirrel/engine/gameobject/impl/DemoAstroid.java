@@ -9,14 +9,13 @@ import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.statistics.PerformanceStatistics;
 import com.squirrel.engine.utils.ApplicationUtils;
 
-public class DemoAstroid extends AnimatedSimplePhysicalGameObject {
+public class DemoAstroid extends UpdateableDrawableCollidableGameObject {
 	
 	private double maxSpeed = 100;
 	
 	private double speed_x = 0;
 	private double speed_y = 0;
 	private Configuration config = (Configuration) ApplicationUtils.getInstance().getBean("configuration");
-	private PerformanceStatistics ps = (PerformanceStatistics) ApplicationUtils.getInstance().getBean("performanceStatistics");
 	
 	public DemoAstroid(Layer parent) {
 		super("DemoAstroid", parent);
@@ -28,8 +27,7 @@ public class DemoAstroid extends AnimatedSimplePhysicalGameObject {
 		if (animArr != null && animArr.length > 0) {
 			Rectangle[] bboxes = {new Rectangle(10,4,animArr[0].getImage().getWidth(null) - 14, animArr[0].getImage().getHeight(null) - 20)};
 			setCollisionBoxes(bboxes);
-			setWidth(animArr[0].getImage().getWidth(null));
-			setHeight(animArr[0].getImage().getHeight(null));
+			setDimension(animArr[0].getImage().getWidth(null),animArr[0].getImage().getHeight(null));
 		}
 	}
 	

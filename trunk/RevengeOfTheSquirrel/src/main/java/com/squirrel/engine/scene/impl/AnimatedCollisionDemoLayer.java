@@ -8,7 +8,7 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.GameObject;
-import com.squirrel.engine.gameobject.impl.AnimatedSimplePhysicalGameObject;
+import com.squirrel.engine.gameobject.impl.UpdateableDrawableCollidableGameObject;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
@@ -43,7 +43,7 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		final Configuration configuration = (Configuration) ApplicationUtils.getInstance().getBean("configuration");;
 		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
 		
-		AnimatedSimplePhysicalGameObject obj = new AnimatedSimplePhysicalGameObject(id, this){
+		UpdateableDrawableCollidableGameObject obj = new UpdateableDrawableCollidableGameObject(id, this){
 			private double maxSpeed = 100;
 			private double speed_x = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private double speed_y = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
@@ -79,8 +79,7 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		if (animArr != null && animArr.length > 0) {
 			Rectangle[] bboxes = {new Rectangle(10,4,animArr[0].getImage().getWidth(null) - 14, animArr[0].getImage().getHeight(null) - 20)};
 			obj.setCollisionBoxes(bboxes);
-			obj.setWidth(animArr[0].getImage().getWidth(null));
-			obj.setHeight(animArr[0].getImage().getHeight(null));
+			obj.setDimension(animArr[0].getImage().getWidth(null), animArr[0].getImage().getHeight(null));
 		}
 		obj.setStartIndex(r.nextInt(animArr.length));
 		obj.scale(minScale + (r.nextDouble() * (maxScale - minScale)));
