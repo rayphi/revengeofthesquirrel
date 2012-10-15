@@ -45,6 +45,12 @@ public interface Collidable {
 	void onCollision(CollisionEvent cevt);
 	
 	/**
+	 * Diese Methode wird aufgerufen, wenn klar ist, dass das Objekt im aktuellen Frame definitif nicht
+	 * kollidiert ist. 
+	 */
+	void onNoCollision();
+	
+	/**
 	 * Gibt die x-Koordinate der Position des Objektes zur�ck
 	 * 
 	 * @return

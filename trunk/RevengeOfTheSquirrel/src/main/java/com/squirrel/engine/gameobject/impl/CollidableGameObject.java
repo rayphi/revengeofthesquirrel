@@ -53,8 +53,7 @@ public class CollidableGameObject extends GameObject implements Collidable {
 				rect1.translate((int) c.getPosx(), (int) c.getPosy());
 				rect2.translate((int) posx, (int) posy);
 				if (rect1.intersects(rect2)) {
-					c.onCollision(new CollisionEvent(this));
-					this.onCollision(new CollisionEvent(c));
+					return true;
 				}
 			}
 		}
@@ -99,5 +98,9 @@ public class CollidableGameObject extends GameObject implements Collidable {
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onNoCollision() {
 	}
 }

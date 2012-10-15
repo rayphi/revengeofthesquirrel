@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.GameManager;
 import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.Drawable;
@@ -137,13 +138,24 @@ public class LayerImpl implements Layer{
 	 */
 	@Override
 	public void collisionCheck(Collidable c) {
+		boolean collided = false;
 		for (GameObject gObj1 : content) {
-			// Pr�ft, ob das betrachtete GameObject ein Collidable ist
+			// Prüft, ob das betrachtete GameObject ein Collidable ist
 			if (gObj1 instanceof Collidable) {
 				if (gObj1 != c) {
-					((Collidable) gObj1).collisionCheck(c);
+					if (((Collidable) gObj1).collisionCheck(c)) {
+						((Collidable) gObj1).onCollision(new CollisionEvent(c));
+						c.onCollision(new CollisionEvent(((Collidable) gObj1)));
+						// festhalten, dass das Objekt mindestens einmal kollidiert ist
+						collided = true;
+					}
 				}
 			}
+		}
+		
+		// Wen das Objekt nicht kollidiert ist
+		if (!collided) {
+			c.onNoCollision();
 		}
 	}
 
