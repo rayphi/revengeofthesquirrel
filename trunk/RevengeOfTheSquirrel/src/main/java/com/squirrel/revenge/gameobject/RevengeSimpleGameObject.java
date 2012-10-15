@@ -40,10 +40,9 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 	protected boolean grounded = false;
 	
 	protected boolean jumping = false;
-	
-	protected double jumpAdded = 0.0;
-	
+	protected double jumpStartY = 0;
 	protected double maxJumpHeight = 50.0;
+	protected double jumpSpeed = 20.0;
 	
 	/**
 	 * Die aktuelle horizontale Geschwindigkeit.
@@ -69,6 +68,8 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 	public void onCollision(CollisionEvent cevt) {
 		Collidable c = cevt.getTarget();
 		
+		// TODO Wenn das Objekt irgendwo gegen spring -> sprung abbrechen
+		
 		if (c instanceof InvisibleWall) {
 			// Es gab eine collision mit einer Bande
 			
@@ -89,6 +90,11 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 		}
 		
 		customCollision(cevt);
+	}
+	
+	@Override
+	public void onNoCollision() {
+		grounded = false;
 	}
 	
 	/**
@@ -132,11 +138,17 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 				movementVertical -= g / ps.getFPS();
 		}
 		
+		// Wenn sich das Objekt gerade in einem Sprung befindet
 		if (jumping) {
-			if (jumpAdded < maxJumpHeight) {
+			// Wenn die Maximale Sprunghöhe erreicht wurde 
+			if (jumpStartY - posy >= maxJumpHeight) {
+				movementVertical = 0.0;
+				jumping = false;
+			} 
+			// Wenn die maximale Sprunghöhe noch nicht erreicht wurde
+			else {
 				grounded = false;
 				double jumpFragment = (maxJumpHeight * acceleration) / ps.getFPS(); 
-				jumpAdded += jumpFragment;
 				movementVertical += jumpFragment;
 			}
 		}
@@ -171,7 +183,14 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 		animationMap.put(name, animation);
 	}
 
+	/**
+	 * Initiiert eine Sprung des Objektes.
+	 * Dies funktioniert nur, wenn das Objekt gerade auf etwas steht oder liegt, also grounded == true erfüllt ist
+	 */
 	public void jump() {
-		jumping = true;
+		if (grounded) {
+			jumping = true;
+			jumpStartY = posy;
+		}
 	}
 }

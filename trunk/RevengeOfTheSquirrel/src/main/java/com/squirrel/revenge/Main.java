@@ -15,7 +15,6 @@ import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
 import com.squirrel.engine.scene.impl.AnimatedCollisionDemoLayer;
-import com.squirrel.engine.scene.impl.SceneFactoryImpl;
 import com.squirrel.engine.scene.impl.SimpleKeyHandlerDemoLayer;
 import com.squirrel.engine.utils.ApplicationUtils;
 import com.squirrel.revenge.gameobject.InvisibleWall;
