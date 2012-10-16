@@ -1,4 +1,4 @@
-package com.squirrel.engine.layer.impl;
+package com.squirrel.engine.layer.demo;
 
 import java.awt.Rectangle;
 import java.util.Random;
@@ -9,6 +9,7 @@ import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.impl.UpdateableDrawableCollidableGameObject;
+import com.squirrel.engine.layer.impl.LayerImpl;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 /**

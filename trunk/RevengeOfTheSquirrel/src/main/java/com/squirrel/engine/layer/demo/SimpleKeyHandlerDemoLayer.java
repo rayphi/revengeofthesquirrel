@@ -1,4 +1,4 @@
-package com.squirrel.engine.layer.impl;
+package com.squirrel.engine.layer.demo;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -7,6 +7,7 @@ import com.squirrel.engine.gameobject.impl.DemoAstroid;
 import com.squirrel.engine.gameobject.impl.TextualGameObject;
 import com.squirrel.engine.io.InputManager;
 import com.squirrel.engine.io.KeyHandler;
+import com.squirrel.engine.layer.impl.LayerImpl;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 public class SimpleKeyHandlerDemoLayer extends LayerImpl {
