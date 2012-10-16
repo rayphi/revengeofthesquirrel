@@ -45,7 +45,7 @@ public class Main {
 		// Die Configuration aus dem Context laden
 		Configuration config = (Configuration) ApplicationUtils.getInstance().getBean("configuration");
 		
-		{ // Ã„nderungen an der Konfiguration vornehmen
+		{ // €nderungen an der Konfiguration vornehmen
 			
 		}
 		

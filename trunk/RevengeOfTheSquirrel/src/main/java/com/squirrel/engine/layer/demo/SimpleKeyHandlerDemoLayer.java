@@ -20,7 +20,7 @@ public class SimpleKeyHandlerDemoLayer extends LayerImpl {
 	public SimpleKeyHandlerDemoLayer() {
 		super("SimpleKeyHandlerDemoLayer");
 		
-		setPriority(1000);
+		setPriority(101);
 		im = (InputManager) ApplicationUtils.getInstance().getBean("inputManager");
 		
 		tgo = new TextualGameObject("KeyInteractionDisplay", new Point(100, 100), "no key interaction", this);
