@@ -3,6 +3,7 @@ package com.squirrel.engine.scene.impl;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

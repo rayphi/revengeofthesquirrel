@@ -50,8 +50,9 @@ public abstract class GameObject {
 	 * @param identifier
 	 * @param parent
 	 */
-	public GameObject(String identifier) {
+	public GameObject(String identifier, Layer parent) {
 		this.identifier = identifier;
+		this.parent = parent;
 	}
 	
 	/**

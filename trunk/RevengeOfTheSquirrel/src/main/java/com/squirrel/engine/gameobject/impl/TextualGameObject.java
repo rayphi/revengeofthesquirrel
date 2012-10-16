@@ -7,6 +7,7 @@ import java.util.Map;
 import com.squirrel.engine.gameobject.Drawable;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.Updateable;
+import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 
 /**
@@ -32,8 +33,8 @@ public class TextualGameObject extends GameObject implements Drawable, Updateabl
 	 * @param msg
 	 * @param parent
 	 */
-	public TextualGameObject(String id, Point2D pos, String msg) {
-		super(id);
+	public TextualGameObject(String id, Point2D pos, String msg, Layer parent) {
+		super(id, parent);
 		posx = pos.getX();
 		posy = pos.getY();
 		this.msg = msg;
