@@ -1,4 +1,4 @@
-package com.squirrel.revenge.gameobject;
+package com.squirrel.engine.gameobject.impl;
 
 import java.awt.Rectangle;
 import java.util.Map;
@@ -9,8 +9,8 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.GameObject;
-import com.squirrel.engine.gameobject.impl.UpdateableDrawableCollidableGameObject;
 import com.squirrel.engine.layer.Layer;
+import com.squirrel.revenge.gameobject.InvisibleWall;
 
 /**
  * TODO document
@@ -18,9 +18,9 @@ import com.squirrel.engine.layer.Layer;
  * @author mills
  *
  */
-public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObject {
+public class InteractingSimpleGameObject extends UpdateableDrawableCollidableGameObject {
 
-	private static Logger logger = Logger.getLogger(RevengeSimpleGameObject.class);
+	private static Logger logger = Logger.getLogger(InteractingSimpleGameObject.class);
 	
 	/**
 	 * Eine gefakte Gravitation
@@ -41,7 +41,7 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 	
 	protected boolean jumping = false;
 	protected double jumpStartY = 0;
-	protected double maxJumpHeight = 50.0;
+	protected double maxJumpHeight = 100.0;
 	protected double jumpSpeed = 20.0;
 	
 	/**
@@ -60,7 +60,7 @@ public class RevengeSimpleGameObject extends UpdateableDrawableCollidableGameObj
 	 */
 	protected double acceleration = 0.4;
 		
-	public RevengeSimpleGameObject(String identifier, Layer parent) {
+	public InteractingSimpleGameObject(String identifier, Layer parent) {
 		super(identifier, parent);
 	}
 
