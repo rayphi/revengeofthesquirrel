@@ -22,6 +22,10 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 	private int numberTargets;
 	private Random r;
 	
+	public AnimatedCollisionDemoLayer() {
+		this(10);
+	}
+	
 	public AnimatedCollisionDemoLayer(int count) {
 		super("CollisionDemo");
 		
@@ -43,7 +47,7 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		final Configuration configuration = (Configuration) ApplicationUtils.getInstance().getBean("configuration");;
 		AssetManager am = (AssetManager) ApplicationUtils.getInstance().getBean("assetManager");
 		
-		AnimatedSimplePhysicalGameObject obj = new AnimatedSimplePhysicalGameObject(id, this){
+		AnimatedSimplePhysicalGameObject obj = new AnimatedSimplePhysicalGameObject(id){
 			private double maxSpeed = 100;
 			private double speed_x = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
 			private double speed_y = (r.nextDouble() * (maxSpeed * 2)) - maxSpeed;
@@ -88,5 +92,4 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 		
 		return obj;
 	}
-
 }

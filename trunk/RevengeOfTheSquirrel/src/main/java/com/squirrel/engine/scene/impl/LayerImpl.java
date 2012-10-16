@@ -1,7 +1,10 @@
 package com.squirrel.engine.scene.impl;
 
 import java.awt.Graphics;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.squirrel.engine.game.GameManager;
@@ -80,7 +83,20 @@ public class LayerImpl implements Layer{
 	 * @param obj
 	 */
 	public void addGameObject(GameObject obj) {
+		obj.setParent(this);
 		content.add(obj);
+	}
+	
+	/**
+	 * FŸgt alle {@link GameObject}s der Ÿbergebenen Collection dem 
+	 * content hinzu
+	 * 
+	 * @param gameObjects
+	 */
+	public void addAllGameObjects(Collection<GameObject> gameObjects) {
+		for (GameObject gameObject : gameObjects) {
+			addGameObject(gameObject);
+		}
 	}
 	
 	@Override
@@ -103,7 +119,7 @@ public class LayerImpl implements Layer{
 		content.removeAll(removeAtUpdate);
 		removeAtUpdate.clear();
 		
-		content.addAll(addAtUpdate);
+		addAllGameObjects(addAtUpdate);
 		addAtUpdate.clear();
 		
 		// GameObjects aktualisiseren
@@ -148,5 +164,31 @@ public class LayerImpl implements Layer{
 
 	public void setPriority(long priority) {
 		this.priority = priority;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void load(Map<String, Object> layerMap) throws Exception {
+		// name (pflicht)
+		String name = (String) layerMap.get(SceneArchiveConstants.NAME);
+		if (name != null) {
+			this.name = name;
+		} else {
+			throw new Exception("Property 'name' missing");
+		}
+		
+		// priority (pflicht)
+		Long priority = (Long) layerMap.get(SceneArchiveConstants.PRIORITY);
+		if (priority != null) {
+			this.priority = priority;
+		} else {
+			throw new Exception("Property 'priority' missing");
+		}
+		
+		// content (optional)
+		List<GameObject> gos = (List<GameObject>) layerMap.get(SceneArchiveConstants.CONTENT);
+		if (gos != null) {
+			addAllGameObjects(gos);
+		}
 	}
 }

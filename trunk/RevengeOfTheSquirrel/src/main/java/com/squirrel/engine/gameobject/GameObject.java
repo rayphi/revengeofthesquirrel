@@ -1,6 +1,9 @@
 package com.squirrel.engine.gameobject;
 
+import java.util.Map;
+
 import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 
 /**
  * Repräsentiert ein beliebiges Objekt im Spiel, z.B die Spielfigur, oder ein Element
@@ -29,15 +32,22 @@ public abstract class GameObject {
 	 */
 	protected Layer parent;
 	
+	public Layer getParent() {
+		return parent;
+	}
+
+	public void setParent(Layer parent) {
+		this.parent = parent;
+	}
+
 	/**
 	 * Initialisiert ein GameObject
 	 * 
 	 * @param identifier
 	 * @param parent
 	 */
-	public GameObject(String identifier, Layer parent) {
+	public GameObject(String identifier) {
 		this.identifier = identifier;
-		this.parent = parent;
 	}
 	
 	/**
@@ -86,5 +96,31 @@ public abstract class GameObject {
 	@Override
 	public int hashCode() {
 		return identifier.hashCode();
+	}
+
+	public void load(Map<String, Object> goMap) throws Exception {
+		// position x
+		Double pos_x = (Double) goMap.get(SceneArchiveConstants.POS_X);
+		if (pos_x != null) {
+			this.posx = pos_x;
+		} else {
+			throw new Exception("Property 'pos_x' missing.");
+		}
+
+		// position y
+		Double pos_y = (Double) goMap.get(SceneArchiveConstants.POS_Y);
+		if (pos_y != null) {
+			this.posy = pos_y;
+		} else {
+			throw new Exception("Property 'pos_y' missing.");
+		}
+		
+		// identifier
+		String identifier = (String) goMap.get(SceneArchiveConstants.NAME);
+		if (identifier != null) {
+			this.identifier = identifier;
+		} else {
+			throw new Exception("Property 'name' missing.");
+		}
 	}
 }

@@ -2,6 +2,7 @@ package com.squirrel.engine.scene.impl;
 
 import com.squirrel.engine.scene.Scene;
 import com.squirrel.engine.scene.SceneFactory;
+import com.squirrel.engine.scene.SceneLoader;
 
 /**
  * Die SceneFactory hält eine Referenz auf die aktuelle {@link Scene} und 
@@ -24,6 +25,12 @@ public class SceneFactoryImpl implements SceneFactory {
 	@Override
 	public void clearScene() {
 		currentScene = null;
+	}
+
+	@Override
+	public Scene loadScene(String pathToArchive, String sceneName) {
+		SceneLoader sl = new SceneLoader(pathToArchive);
+		return sl.loadScene(sceneName);
 	}
 
 }

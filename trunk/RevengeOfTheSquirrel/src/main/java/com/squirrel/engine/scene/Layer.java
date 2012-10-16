@@ -1,6 +1,8 @@
 package com.squirrel.engine.scene;
 
 import java.awt.Graphics;
+import java.util.Collection;
+import java.util.Map;
 
 import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.GameObject;
@@ -43,6 +45,12 @@ public interface Layer {
 	void addGameObject(GameObject obj);
 	
 	/**
+	 * Fügt dem {@link Layer} alle {@link GameObject} Entitäten der übergebenen {@link Collection} hinzu
+	 * @param gameObjects
+	 */
+	void addAllGameObjects(Collection<GameObject> gameObjects);
+	
+	/**
 	 * Fügt bei dem naächsten Update das übergebene {@link GameObject}
 	 * hinzu
 	 * @param obj
@@ -65,4 +73,11 @@ public interface Layer {
 	 * Prüft, ob der übergebene {@link Collidable} kollidiert ist
 	 */
 	void collisionCheck(Collidable c);
+
+	/**
+	 * Erzeugt eine instanz der Layerimplementierung auf Basis der übergebenen Map
+	 * 
+	 * @param layerMap
+	 */
+	void load(Map<String, Object> layerMap) throws Exception;
 }

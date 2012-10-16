@@ -3,6 +3,8 @@ package com.squirrel.engine.gameobject.impl;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.List;
+import java.util.Map;
 
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
@@ -12,6 +14,7 @@ import com.squirrel.engine.gameobject.Drawable;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.Updateable;
 import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
@@ -55,8 +58,8 @@ public class SimplePhysicalGameObject extends GameObject implements 	Collidable,
 	 * @param identifier
 	 * @param parent
 	 */
-	public SimplePhysicalGameObject(String identifier, Layer parent) {
-		super(identifier, parent);
+	public SimplePhysicalGameObject(String identifier) {
+		super(identifier);
 		
 		gm = (GameManager) ApplicationUtils.getInstance().getBean("gameManager");
 	}
@@ -233,5 +236,38 @@ public class SimplePhysicalGameObject extends GameObject implements 	Collidable,
 	 */
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void load(Map<String, Object> goMap) throws Exception {
+		super.load(goMap);
+		
+		Map<String, Object> map = (Map<String, Object>) goMap.get(SceneArchiveConstants.MAP);
+		if (map != null) {
+			
+			// collisionBoxes
+			List<Object> cList = (List<Object>) map.get("collisionBoxes");
+			if (cList != null) {
+				collisionBoxes = new Rectangle[cList.size()];
+				
+				for (int i = 0; i<cList.size(); i++) {
+					String box = (String) cList.get(i);
+					String[] koords = box.split(",");
+					collisionBoxes[i] = new Rectangle(	Integer.parseInt(koords[0].trim()), 
+														Integer.parseInt(koords[1].trim()), 
+														Integer.parseInt(koords[2].trim()), 
+														Integer.parseInt(koords[3].trim()));
+				}
+			}
+			
+			// texture
+			String textureRef = (String) map.get("texture");
+			
+			// TODO width
+			// TODO height
+		} else {
+			throw new Exception("Map with specifics missing.");
+		}
 	}
 }

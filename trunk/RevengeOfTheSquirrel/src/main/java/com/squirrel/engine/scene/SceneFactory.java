@@ -19,4 +19,9 @@ public interface SceneFactory {
 	 * Leert die Scene vollständig
 	 */
 	void clearScene();
+
+	/**
+	 * lädt eine bestimmte {@link Scene}
+	 */
+	Scene loadScene(String pathToArchive, String sceneName);
 }

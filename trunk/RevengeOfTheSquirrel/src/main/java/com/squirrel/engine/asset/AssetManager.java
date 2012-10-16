@@ -1,5 +1,7 @@
 package com.squirrel.engine.asset;
 
+import java.io.InputStream;
+
 import com.squirrel.engine.asset.impl.SpriteAsset;
 
 /**
@@ -28,6 +30,15 @@ public interface AssetManager {
 	 * @return
 	 */
 	Asset load(String identifier);
+	
+	/**
+	 * erzeugt ein Asset anhand des Ÿbergebenen InputStreams
+	 * 
+	 * @param identifier
+	 * @param in
+	 * @return
+	 */
+	Asset load(String identifier, InputStream in);
 	
 	/**
 	 * LŠdt ein sortiertes und symmetrisches sprite sheet und erzeugt ein 

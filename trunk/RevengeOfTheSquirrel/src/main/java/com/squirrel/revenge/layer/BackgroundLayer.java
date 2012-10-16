@@ -7,6 +7,7 @@ public class BackgroundLayer extends LayerImpl {
 	public BackgroundLayer() {
 		super("background");
 		
+		setPriority(0);
 	}
 
 }

@@ -1,7 +1,13 @@
 package com.squirrel.engine.gameobject.impl;
 
+import java.util.Map;
+
+import com.squirrel.engine.asset.Asset;
+import com.squirrel.engine.asset.AssetManager;
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.scene.impl.SceneArchiveConstants;
+import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
  * Repräsentiert ein animiertes {@link SimplePhysicalGameObject}
@@ -25,8 +31,8 @@ public class AnimatedSimplePhysicalGameObject extends SimplePhysicalGameObject {
 	private long lastSwitch = System.currentTimeMillis();
 	private int nextImage = 0;
 	
-	public AnimatedSimplePhysicalGameObject(String identifier, Layer parent) {
-		super(identifier, parent);
+	public AnimatedSimplePhysicalGameObject(String identifier) {
+		super(identifier);
 	}
 	
 	@Override
@@ -95,6 +101,24 @@ public class AnimatedSimplePhysicalGameObject extends SimplePhysicalGameObject {
 		super.scale(scale);
 		for (SpriteAsset sa : spriteArr) {
 			sa.scale(scale);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void load(Map<String, Object> goMap) throws Exception {
+		super.load(goMap);
+		
+		Map<String, Object> map = (Map<String, Object>) goMap.get(SceneArchiveConstants.MAP);
+		if (map != null) {
+			
+			// TODO spriteArr (nur der Verwies auf das spritesheet)
+			
+			// TODO frequency
+			// TODO nextImage
+			
+		} else {
+			throw new Exception("Map with specifics missing.");
 		}
 	}
 }

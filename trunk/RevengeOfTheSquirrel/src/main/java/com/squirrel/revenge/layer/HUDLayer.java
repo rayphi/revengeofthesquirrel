@@ -25,7 +25,7 @@ public class HUDLayer extends LayerImpl {
 
 	private void initDebugHUD() {
 		// FPS ausgeben
-		addGameObject(new TextualGameObject("fps", new Point(30, 100), null, this){
+		addGameObject(new TextualGameObject("fps", new Point(30, 100), null){
 			@Override
 			public void update() {
 				super.update();
@@ -44,7 +44,7 @@ public class HUDLayer extends LayerImpl {
 		int posY =  (conf.getScreenHeight() / 100) * 5;
 		
 		Score score = new Score();
-		addGameObject(new TextualGameObject("score", new Point(posX,posY), String.valueOf(score.getScore()) , this));
+		addGameObject(new TextualGameObject("score", new Point(posX,posY), String.valueOf(score.getScore())));
 		
 	}
 	
