@@ -33,14 +33,24 @@
 	<context:component-scan base-package="com.squirrel" />
 	<context:annotation-config />
 
-	<bean id="configuration" class="com.squirrel.engine.game.Configuration" scope="singleton">
-		
-	</bean>
+
+	<!-- *********************** engine Beans ****************************************************** -->
+	<bean id="configuration" class="com.squirrel.engine.game.Configuration" scope="singleton" />
+	
 	<bean id="assetManager" class="com.squirrel.engine.asset.impl.AssetManagerImpl" scope="singleton" />
+	
 	<bean id="sceneFactory" class="com.squirrel.engine.scene.impl.SceneFactoryImpl" scope="singleton" />
+	
 	<bean id="performanceStatistics" class="com.squirrel.engine.statistics.PerformanceStatistics" scope="singleton" />
+	
 	<bean id="gameManager" class="com.squirrel.engine.game.GameManager" scope="singleton" >
 		<property name="debug" value="true" />
 	</bean>
+	
 	<bean id="inputManager" class="com.squirrel.engine.io.InputManager" scope="singleton" />
+	
+	
+	<!-- ************************** game beans *************************************************** -->
+	<bean id="scoreManager" class="com.squirrel.revenge.score.ScoreManager" scope="singleton" />
+	
 </beans>

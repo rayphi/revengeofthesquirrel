@@ -6,12 +6,12 @@ import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.impl.TextualGameObject;
 import com.squirrel.engine.scene.impl.LayerImpl;
 import com.squirrel.engine.utils.ApplicationUtils;
-import com.squirrel.revenge.score.Score;
+import com.squirrel.revenge.score.ScoreManager;
 
 /**
  * Dieser Layer realisiert ein HUD
  * 
- * @author Shane, LŸdtke
+ * @author Shane, Andreas
  *
  */
 public class HUDLayer extends LayerImpl {
@@ -57,11 +57,15 @@ public class HUDLayer extends LayerImpl {
 		// Score wird im Bild 5% vom oberen Rand angezeigt
 		int posY =  (conf.getScreenHeight() / 100) * 5;
 		
-		// TODO der Score muss dynamisch via spring ermittelt und Ÿber ein TextualGameObject updateable gemacht werden
 		// Den Score anzeigen
-		Score score = new Score();
-		addGameObject(new TextualGameObject("score", new Point(posX,posY), String.valueOf(score.getScore()), this));
-		
+		addGameObject(new TextualGameObject("score", new Point(posX,posY), null, this){
+			ScoreManager sm = (ScoreManager) ApplicationUtils.getInstance().getBean("scoreManager");
+			@Override
+			public void update() {
+				super.update();
+				msg = String.valueOf(sm.getScore());
+			}
+		});
 	}
 	
 	
