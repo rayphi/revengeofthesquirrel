@@ -2,7 +2,7 @@ package com.squirrel.engine.gameobject.impl;
 
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.gameobject.Updateable;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
 
 /**
  * Repräsentiert ein animiertes {@link DrawableCollidableGameObject}

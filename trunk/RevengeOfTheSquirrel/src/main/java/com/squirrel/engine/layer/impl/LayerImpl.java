@@ -1,4 +1,4 @@
-package com.squirrel.engine.scene.impl;
+package com.squirrel.engine.layer.impl;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,7 +15,8 @@ import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.Drawable;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.Updateable;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
+import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 import com.squirrel.engine.statistics.PerformanceStatistics;
 import com.squirrel.engine.utils.ApplicationUtils;
 

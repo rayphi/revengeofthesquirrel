@@ -1,4 +1,4 @@
-package com.squirrel.engine.scene.impl;
+package com.squirrel.engine.layer.impl;
 
 import java.awt.Rectangle;
 import java.util.Random;

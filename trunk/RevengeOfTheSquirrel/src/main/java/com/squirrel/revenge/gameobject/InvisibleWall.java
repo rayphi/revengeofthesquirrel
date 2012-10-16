@@ -3,7 +3,7 @@ package com.squirrel.revenge.gameobject;
 import java.awt.Rectangle;
 
 import com.squirrel.engine.gameobject.impl.CollidableGameObject;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
 
 /**
  * Stellt einfach nur eine Unsichtbare Wand dar.

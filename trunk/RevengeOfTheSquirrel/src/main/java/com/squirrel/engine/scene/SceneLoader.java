@@ -21,6 +21,7 @@ import com.squirrel.engine.asset.Asset;
 import com.squirrel.engine.asset.AssetManager;
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.gameobject.GameObject;
+import com.squirrel.engine.layer.Layer;
 import com.squirrel.engine.scene.impl.SceneImpl;
 import com.squirrel.engine.utils.ApplicationUtils;
 

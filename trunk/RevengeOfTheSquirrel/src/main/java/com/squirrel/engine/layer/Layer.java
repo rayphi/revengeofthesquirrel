@@ -1,4 +1,4 @@
-package com.squirrel.engine.scene;
+package com.squirrel.engine.layer;
 
 import java.awt.Graphics;
 import java.util.Collection;

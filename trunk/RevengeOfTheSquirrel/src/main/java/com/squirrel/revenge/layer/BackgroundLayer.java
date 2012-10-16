@@ -1,6 +1,6 @@
 package com.squirrel.revenge.layer;
 
-import com.squirrel.engine.scene.impl.LayerImpl;
+import com.squirrel.engine.layer.impl.LayerImpl;
 
 public class BackgroundLayer extends LayerImpl {
 

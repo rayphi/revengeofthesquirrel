@@ -4,7 +4,8 @@ import java.awt.Graphics;
 import java.util.Arrays;
 
 import com.squirrel.engine.gameobject.GameObject;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
+import com.squirrel.engine.layer.impl.LayerImpl;
 import com.squirrel.engine.scene.Scene;
 
 public class SceneImpl implements Scene {

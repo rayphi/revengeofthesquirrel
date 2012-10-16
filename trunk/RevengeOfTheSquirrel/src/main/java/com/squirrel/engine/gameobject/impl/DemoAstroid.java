@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import com.squirrel.engine.asset.AssetManager;
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.game.Configuration;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
 import com.squirrel.engine.statistics.PerformanceStatistics;
 import com.squirrel.engine.utils.ApplicationUtils;
 

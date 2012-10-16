@@ -2,7 +2,7 @@ package com.squirrel.engine.gameobject;
 
 import java.util.Map;
 
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
 import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 
 /**

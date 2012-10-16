@@ -3,6 +3,7 @@ package com.squirrel.engine.scene;
 import java.awt.Graphics;
 
 import com.squirrel.engine.gameobject.GameObject;
+import com.squirrel.engine.layer.Layer;
 
 /**
  * Beschreibt, was eine Scene kšnnen muss

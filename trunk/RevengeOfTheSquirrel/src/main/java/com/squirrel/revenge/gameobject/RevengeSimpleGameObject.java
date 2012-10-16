@@ -10,7 +10,7 @@ import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.GameObject;
 import com.squirrel.engine.gameobject.impl.UpdateableDrawableCollidableGameObject;
-import com.squirrel.engine.scene.Layer;
+import com.squirrel.engine.layer.Layer;
 
 /**
  * TODO document
