@@ -6,9 +6,9 @@ import com.squirrel.engine.scene.Layer;
 import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 
 /**
- * ReprŠsentiert ein beliebiges Objekt im Spiel, z.B die Spielfigur, oder ein Element
- * des HUD. Auch unsichtbare Objekte sind denkbar, wie zum Beispiel unsichtbare WŠnde oder
- * Tšne.
+ * Reprï¿½sentiert ein beliebiges Objekt im Spiel, z.B die Spielfigur, oder ein Element
+ * des HUD. Auch unsichtbare Objekte sind denkbar, wie zum Beispiel unsichtbare Wï¿½nde oder
+ * Tï¿½ne.
  * 
  * @author Shane
  *
@@ -23,8 +23,12 @@ public abstract class GameObject {
 	 * die y-Koordinate der Position dieses Objektes
 	 */
 	protected double posy;
+	
+	protected int width;
+
+	protected int height;
 	/**
-	 * †ber diesen Bezeichner lŠsst sich das Objekt identifizieren
+	 * ï¿½ber diesen Bezeichner lï¿½sst sich das Objekt identifizieren
 	 */
 	protected String identifier;
 	/**
@@ -51,7 +55,7 @@ public abstract class GameObject {
 	}
 	
 	/**
-	 * Gibt den Bezeichner zurŸck
+	 * Gibt den Bezeichner zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -60,7 +64,7 @@ public abstract class GameObject {
 	}
 	
 	/**
-	 * Gibt die x-Koordinate der Position zurŸck
+	 * Gibt die x-Koordinate der Position zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -69,7 +73,7 @@ public abstract class GameObject {
 	}
 	
 	/**
-	 * Gibt die x-Koordinate der Position zurŸck
+	 * Gibt die x-Koordinate der Position zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -78,7 +82,7 @@ public abstract class GameObject {
 	}
 	
 	/**
-	 * GameObjects werden Ÿber ihren Identifier verglichen
+	 * GameObjects werden ï¿½ber ihren Identifier verglichen
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -122,5 +126,15 @@ public abstract class GameObject {
 		} else {
 			throw new Exception("Property 'name' missing.");
 		}
+	}
+	
+	public void setPosition(double x, double y) {
+		this.posx = x;
+		this.posy = y;
+	}
+	
+	public void setDimension(int width, int height) {
+		this.width = width;
+		this.height = height;
 	}
 }

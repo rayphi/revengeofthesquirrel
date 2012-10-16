@@ -12,7 +12,7 @@ import com.squirrel.engine.scene.impl.SceneArchiveConstants;
 /**
  * Ein {@link Drawable} und {@link Updateable} {@link GameObject}
  * 
- * Dies repräsentiert explizit ein textuelles Object
+ * Dies repr√§sentiert explizit ein textuelles Object
  * 
  * @author Shane
  *
@@ -62,5 +62,9 @@ public class TextualGameObject extends GameObject implements Drawable, Updateabl
 				this.msg = msg;
 			}
 		}
+	}
+	
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 }

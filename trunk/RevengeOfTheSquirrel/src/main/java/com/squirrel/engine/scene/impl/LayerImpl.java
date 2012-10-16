@@ -1,12 +1,14 @@
 package com.squirrel.engine.scene.impl;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Collection;
+import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.squirrel.engine.event.impl.CollisionEvent;
 import com.squirrel.engine.game.GameManager;
 import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.Drawable;
@@ -17,8 +19,8 @@ import com.squirrel.engine.statistics.PerformanceStatistics;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
- * ReprŠsentiert einen Layer in einer Szene. Es soll nicht alles auf einem Layer sein,
- * da unser Konzept vorhieht, dass grundsŠtzlich erstmal alles ein GameObject ist
+ * Reprï¿½sentiert einen Layer in einer Szene. Es soll nicht alles auf einem Layer sein,
+ * da unser Konzept vorhieht, dass grundsï¿½tzlich erstmal alles ein GameObject ist
  */
 public class LayerImpl implements Layer{
 
@@ -27,7 +29,7 @@ public class LayerImpl implements Layer{
 	 */
 	protected String name;
 	/**
-	 * Die PrioritŠt des Layer
+	 * Die Prioritï¿½t des Layer
 	 */
 	protected long priority;
 
@@ -36,11 +38,11 @@ public class LayerImpl implements Layer{
 	 */
 	protected Set<GameObject> content;
 	/**
-	 * Alle {@link GameObject}s die beim nŠchsten Update des Layer entfernt werden sollen
+	 * Alle {@link GameObject}s die beim nï¿½chsten Update des Layer entfernt werden sollen
 	 */
 	protected Set<GameObject> removeAtUpdate;
 	/**
-	 * Alle {@link GameObject}s die beim nŠchsten Update des Layer hinzugefŸgt werden sollen
+	 * Alle {@link GameObject}s die beim nï¿½chsten Update des Layer hinzugefï¿½gt werden sollen
 	 */
 	protected Set<GameObject> addAtUpdate;
 	
@@ -71,14 +73,14 @@ public class LayerImpl implements Layer{
 	}
 	
 	/**
-	 * Den Namen des Layer zurŸckgeben
+	 * Den Namen des Layer zurï¿½ckgeben
 	 */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * FŸgt ein {@link GameObject} der ungeordneten Liste hinzu
+	 * Fï¿½gt ein {@link GameObject} der ungeordneten Liste hinzu
 	 * 
 	 * @param obj
 	 */
@@ -107,8 +109,20 @@ public class LayerImpl implements Layer{
 	@Override
 	public void draw(Graphics g) {
 		for (GameObject gObj : content) {
-			if (gObj instanceof Drawable)
-				((Drawable) gObj).draw(g);
+			if (gObj instanceof Drawable) {
+				((Drawable) gObj).draw(g);				
+			}
+			
+			// Wenn sich das Spiel im Debug-Modus befindet sollen alle Boundingboxen gezeichnet werden
+			if (gm.isDebug() && gObj instanceof Collidable) {
+				Color color =g.getColor();
+				g.setColor(Color.yellow);
+				Collidable c = ((Collidable) gObj);
+				for (Rectangle rect : c.getCollisionBoxes()) {
+					g.drawRect((int) (rect.x + c.getPosx()), (int) (rect.y + c.getPosy()), rect.width, rect.height);
+				}
+				g.setColor(color);
+			}
 		}
 	}
 
@@ -126,24 +140,37 @@ public class LayerImpl implements Layer{
 		for (GameObject gObj : content) {
 			if (gObj instanceof Updateable)
 				((Updateable) gObj).update();
+			if (gObj instanceof Collidable)
+				collisionCheck((Collidable) gObj);
 		}
 	}
 
 	/**
 	 * TODO Dieser collisioncheck ist noch ziehmlich inperformant,
-	 * da das Ÿbergebene Objekt mit allen andern Objekten verglichen wird.
-	 * Hier muss ein anderer Ansatz her, der es erlaubt, das Ÿbergebene
-	 * Objekt nur mit einer Teilmenge der vorhandenen Objekte zu prŸfen
+	 * da das ï¿½bergebene Objekt mit allen andern Objekten verglichen wird.
+	 * Hier muss ein anderer Ansatz her, der es erlaubt, das ï¿½bergebene
+	 * Objekt nur mit einer Teilmenge der vorhandenen Objekte zu prï¿½fen
 	 */
 	@Override
 	public void collisionCheck(Collidable c) {
+		boolean collided = false;
 		for (GameObject gObj1 : content) {
-			// PrŸft, ob das betrachtete GameObject ein Collidable ist
+			// PrÃ¼ft, ob das betrachtete GameObject ein Collidable ist
 			if (gObj1 instanceof Collidable) {
 				if (gObj1 != c) {
-					((Collidable) gObj1).collisionCheck(c);
+					if (((Collidable) gObj1).collisionCheck(c)) {
+						((Collidable) gObj1).onCollision(new CollisionEvent(c));
+						c.onCollision(new CollisionEvent(((Collidable) gObj1)));
+						// festhalten, dass das Objekt mindestens einmal kollidiert ist
+						collided = true;
+					}
 				}
 			}
+		}
+		
+		// Wen das Objekt nicht kollidiert ist
+		if (!collided) {
+			c.onNoCollision();
 		}
 	}
 
