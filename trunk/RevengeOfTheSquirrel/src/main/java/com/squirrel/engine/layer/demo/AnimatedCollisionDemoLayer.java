@@ -62,10 +62,10 @@ public class AnimatedCollisionDemoLayer extends LayerImpl {
 				posx = posx + (speed_x / ps.getFPS());
 				posy = posy + (speed_y / ps.getFPS());
 				
-				if (posx + width <= 0) posx = config.getScreenWidth() - 1;
-				if (posx >= config.getScreenWidth()) posx = -(width-1);
-				if (posy + height <= 0) posy = config.getScreenHeight() - 1;
-				if (posy >= config.getScreenHeight()) posy = -(height-1);
+				if ((posx) + width <= 0) posx = config.getScreenWidth() - 1;
+				if ((posx) >= config.getScreenWidth()) posx = -(width-1);
+				if ((posy) + height <= 0) posy = config.getScreenHeight() - 1;
+				if ((posy) >= config.getScreenHeight()) posy = -(height-1);
 			}
 			
 			@Override

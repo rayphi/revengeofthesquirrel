@@ -8,74 +8,74 @@ import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.GameObject;
 
 /**
- * ReprŠsentiert einen Layer in der Scene
+ * Reprï¿½sentiert einen Layer in der Scene
  * @author Shane
  *
  */
 public interface Layer {
 
 	/**
-	 * Jeder Layer muss einen unique Namen bekommen, welchen man Ÿber
+	 * Jeder Layer muss einen unique Namen bekommen, welchen man ï¿½ber
 	 * diese Methode abfragn kann.
 	 * @return
 	 */
 	String getName();
 	
 	/**
-	 * Gibt die PrioritŠt des Layer zurŸck
+	 * Gibt die Prioritï¿½t des Layer zurï¿½ck
 	 * @return
 	 */
 	long getPriority();
 	
 	/**
-	 * setzt die PrioritŠt des Layer
+	 * setzt die Prioritï¿½t des Layer
 	 */
 	void setPriority(long prio);
 	
 	/**
-	 * Stš§t das zeichnen aller enthaltenen GameObjects an
+	 * Stï¿½ï¿½t das zeichnen aller enthaltenen GameObjects an
 	 * @param g
 	 */
 	void draw(Graphics g);
 	
 	/**
-	 * FŸgt dem Layer ein {@link GameObject} hinzu
+	 * Fï¿½gt dem Layer ein {@link GameObject} hinzu
 	 * @param obj
 	 */
 	void addGameObject(GameObject obj);
 	
 	/**
-	 * FŸgt dem {@link Layer} alle {@link GameObject} EntitŠten der Ÿbergebenen {@link Collection} hinzu
+	 * Fï¿½gt dem {@link Layer} alle {@link GameObject} Entitï¿½ten der ï¿½bergebenen {@link Collection} hinzu
 	 * @param gameObjects
 	 */
 	void addAllGameObjects(Collection<GameObject> gameObjects);
 	
 	/**
-	 * FŸgt bei dem naŠchsten Update das Ÿbergebene {@link GameObject}
+	 * Fï¿½gt bei dem naï¿½chsten Update das ï¿½bergebene {@link GameObject}
 	 * hinzu
 	 * @param obj
 	 */
 	void addGameObjectAtUpdate(GameObject obj);
 	
 	/**
-	 * Entfernt das Ÿbergebene {@link GameObject} aus dem Layer
+	 * Entfernt das ï¿½bergebene {@link GameObject} aus dem Layer
 	 * @param obj
 	 */
 	void removeGameObjectAtUpdate(GameObject obj);
 
 	/**
 	 * invoked das update aller updateable GameObjects
-	 * zusŠtzlich mŸssen unter UmstŠnden updates am Layer selbst durchgefŸhrt werden
+	 * zusï¿½tzlich mï¿½ssen unter Umstï¿½nden updates am Layer selbst durchgefï¿½hrt werden
 	 */
 	void update();
 
 	/**
-	 * PrŸft, ob der Ÿbergebene {@link Collidable} kollidiert ist
+	 * Prï¿½ft, ob der ï¿½bergebene {@link Collidable} kollidiert ist
 	 */
 	void collisionCheck(Collidable c);
 
 	/**
-	 * Erzeugt eine instanz der Layerimplementierung auf Basis der Ÿbergebenen Map
+	 * Erzeugt eine instanz der Layerimplementierung auf Basis der ï¿½bergebenen Map
 	 * 
 	 * @param layerMap
 	 */

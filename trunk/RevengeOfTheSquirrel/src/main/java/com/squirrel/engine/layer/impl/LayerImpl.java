@@ -92,7 +92,7 @@ public class LayerImpl implements Layer{
 	}
 	
 	/**
-	 * FŸgt alle {@link GameObject}s der Ÿbergebenen Collection dem 
+	 * Fï¿½gt alle {@link GameObject}s der ï¿½bergebenen Collection dem 
 	 * content hinzu
 	 * 
 	 * @param gameObjects
@@ -110,6 +110,7 @@ public class LayerImpl implements Layer{
 
 	@Override
 	public void draw(Graphics g) {
+		
 		for (GameObject gObj : content) {
 			if (gObj instanceof Drawable) {
 				((Drawable) gObj).draw(g);				
@@ -126,6 +127,7 @@ public class LayerImpl implements Layer{
 				g.setColor(color);
 			}
 		}
+		
 	}
 
 	@Override
