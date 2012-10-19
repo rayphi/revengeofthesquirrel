@@ -26,8 +26,8 @@ import com.squirrel.engine.scene.impl.SceneImpl;
 import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
- * Dieser Loader lï¿½dt ein Archiv mit Scene informationen und
- * stellt ï¿½ber die Methode {@link #loadScene(String)} die Mï¿½glichkeit zur Verfï¿½gung
+ * Dieser Loader lŠdt ein Archiv mit Scene informationen und
+ * stellt Ÿber die Methode {@link #loadScene(String)} die Mšglichkeit zur VerfŸgung
  * stellt eine bestimmte {@link Scene} aus dem Archiv zu laden.
  * 
  * @author Shane
@@ -42,7 +42,7 @@ public class SceneLoader {
 	 */
 	private String pathToArchive;
 	/**
-	 * Das Archiv wird wï¿½hrend des Ladevorganges hier gespeichert
+	 * Das Archiv wird wŠhrend des Ladevorganges hier gespeichert
 	 */
 	private ZipFile zipFile;
 	
@@ -56,8 +56,8 @@ public class SceneLoader {
 	}
 	
 	/**
-	 * Lï¿½dt die {@link Scene} mit dem ï¿½bergebenen Namen aus
-	 * dem Archiv, stellt dieses her und gibt es zurï¿½ck.
+	 * LŠdt die {@link Scene} mit dem Ÿbergebenen Namen aus
+	 * dem Archiv, stellt dieses her und gibt es zurŸck.
 	 * Zu diesem Zweck muss es in dem Archiv die Datei 'name-der-scene'.xml geben
 	 * 
 	 * @param sceneName
@@ -86,7 +86,7 @@ public class SceneLoader {
 	}
 
 	/**
-	 * Lï¿½dt eine {@link Scene} aus dem geï¿½ffneten Archiv und gibt diese zurï¿½ck
+	 * LŠdt eine {@link Scene} aus dem gešffneten Archiv und gibt diese zurŸck
 	 * 
 	 * @param sceneName
 	 * @return {@link Scene} oder null
@@ -112,7 +112,7 @@ public class SceneLoader {
 					while(reader.hasNext()) {
 						evt = reader.next();
 						
-						// Prï¿½fen ob ein Layer folgt und diesen entsprechend einlesen
+						// PrŸfen ob ein Layer folgt und diesen entsprechend einlesen
 						if (evt == XMLStreamConstants.START_ELEMENT) {
 							if (reader.getLocalName().equalsIgnoreCase(LAYER)) {
 								Layer layer = readLayer(reader);
@@ -121,7 +121,7 @@ public class SceneLoader {
 							}
 						}
 						
-						// Prï¿½fen, ob bereits alle Layer eingelesen wurden
+						// PrŸfen, ob bereits alle Layer eingelesen wurden
 						if (evt == XMLStreamConstants.END_ELEMENT) {
 							if (reader.getLocalName().equalsIgnoreCase(SCENE)) {
 								break;
@@ -134,7 +134,7 @@ public class SceneLoader {
 				
 			}
 			
-			// Prï¿½fen, ob das Dokument zuende ist
+			// PrŸfen, ob das Dokument zuende ist
 			if (evt == XMLStreamConstants.END_DOCUMENT) {
 				// Import ist abgeschlossen
 				break;
@@ -279,7 +279,7 @@ public class SceneLoader {
 				}
 			}
 			
-			// Prï¿½fen ob alle specifics eingelesen wurden
+			// PrŸfen ob alle specifics eingelesen wurden
 			if (evt == XMLStreamConstants.END_ELEMENT) {
 				if (reader.getLocalName().equalsIgnoreCase(MAP)) {
 					break;
@@ -307,7 +307,7 @@ public class SceneLoader {
 	/**
 	 * Liest alle Assets ab der aktuellen osition des reader ein
 	 * erzeugt die entsprechenden Objekte und gibt diese in form
-	 * einer {@link Map} zurï¿½ck
+	 * einer {@link Map} zurŸck
 	 * 
 	 * @param reader
 	 * @return
@@ -331,7 +331,7 @@ public class SceneLoader {
 						String fileName = reader.getText();
 						ZipEntry assetFile = zipFile.getEntry(fileName);
 						if (assetFile != null) {
-							aMap.put(property, am.loadSprite(assetIdentifier, zipFile.getInputStream(assetFile)));
+							aMap.put(property, am.load(assetIdentifier, zipFile.getInputStream(assetFile)));
 						} else  {
 							throw new Exception("File " + fileName + " does not exist within archive.");
 						}
@@ -421,7 +421,7 @@ public class SceneLoader {
 				}
 			}
 			
-			// Prï¿½fen ob alle GameObjects eingelesen wurden
+			// PrŸfen ob alle GameObjects eingelesen wurden
 			if (evt == XMLStreamConstants.END_ELEMENT) {
 				if (reader.getLocalName().equalsIgnoreCase(CONTENT)) {
 					break;
@@ -489,7 +489,7 @@ public class SceneLoader {
 				
 			}
 			
-			// Prï¿½fen ob das GameObject zuende eingelesen wurde
+			// PrŸfen ob das GameObject zuende eingelesen wurde
 			if (evt == XMLStreamConstants.END_ELEMENT) {
 				if (reader.getLocalName().equalsIgnoreCase(GAMEOBJECT)) {
 					break;
@@ -519,24 +519,24 @@ public class SceneLoader {
 	}
 
 	/**
-	 * ï¿½ffnet das Archiv fï¿½r einen folgenden Ladevorgang
+	 * …ffnet das Archiv fŸr einen folgenden Ladevorgang
 	 * 
 	 * @throws Exception
 	 */
 	private void openSceneArchive() throws Exception {
 		File file = new File(pathToArchive);
 		
-		// Prï¿½fen, ob es die Datei gibt
+		// PrŸfen, ob es die Datei gibt
 		if (file.exists()) {
 			throw new FileNotFoundException(pathToArchive + " not found.");
 		}
 		
-		// Prï¿½fen ob es sich um eine Datei handelt
+		// PrŸfen ob es sich um eine Datei handelt
 		if (!file.isFile()) {
 			throw new Exception(pathToArchive + " is not a file.");
 		}
 		
-		// Als Zip Archiv ï¿½ffnen
+		// Als Zip Archiv šffnen
 		zipFile = new ZipFile(file);
 		
 	}

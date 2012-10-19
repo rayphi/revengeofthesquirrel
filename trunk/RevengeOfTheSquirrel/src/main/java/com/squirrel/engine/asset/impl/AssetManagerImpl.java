@@ -18,7 +18,7 @@ import com.squirrel.engine.asset.AssetManager;
 
 /**
  * Implementiert das interface {@link AssetManager.
- * Diese Implementierung lï¿½dt und cached Assets.
+ * Diese Implementierung lŠdt und cached Assets.
  * 
  * @author Shane
  *
@@ -28,11 +28,11 @@ public class AssetManagerImpl implements AssetManager {
 	protected static final Logger logger = Logger.getLogger(AssetManagerImpl.class);
 	
 	/**
-	 * Enthï¿½lt die Extension aller zulï¿½ssigen Image Formate
+	 * EnthŠlt die Extension aller zulŠssigen Image Formate
 	 */
 	protected List<String> imageExtensions = Arrays.asList("png", "gif", "bmp", "jpg");
 	/**
-	 * Enthï¿½lt alle gecachten Assets
+	 * EnthŠlt alle gecachten Assets
 	 */
 	protected Map<String, Asset> assetStore;
 
@@ -45,11 +45,11 @@ public class AssetManagerImpl implements AssetManager {
 
 	@Override
 	public Asset load(String identifier, String path) {
-		// Prï¿½fen, ob es das Asset schon gibt und es ggf. zurï¿½ckgeben
+		// PrŸfen, ob es das Asset schon gibt und es ggf. zurŸckgeben
 		Asset asset = load(identifier);
 		if (asset != null) return asset;
 
-		// prï¿½fen, ob es die Datei gibt
+		// prŸfen, ob es die Datei gibt
 		File file = new File("src/main/resources/" + path);
 		if (!file.exists()) {
 			logger.error("File does not exsist: " + file.getAbsolutePath());
@@ -57,7 +57,7 @@ public class AssetManagerImpl implements AssetManager {
 		}
 
 		// Datentyp ermitteln (Image/Musikdatei...) und
-		// in entsprechendes Asset umwandeln und asset zurï¿½ckgeben
+		// in entsprechendes Asset umwandeln und asset zurŸckgeben
 		String extension = FilenameUtils.getExtension(file.getName());
 		if (imageExtensions.contains(extension)) {
 			asset = loadSprite(file);
@@ -69,7 +69,7 @@ public class AssetManagerImpl implements AssetManager {
 		if (asset != null)
 			assetStore.put(identifier, asset);
 
-		// Das geladene asset oder null zurï¿½ckgeben
+		// Das geladene asset oder null zurŸckgeben
 		return asset;
 	}
 
@@ -89,7 +89,7 @@ public class AssetManagerImpl implements AssetManager {
 			logger.error("Exception caught loading image file: ", e);
 		}
 
-		// Image in ein SpriteAsset kapseln und zurï¿½ckgeben
+		// Image in ein SpriteAsset kapseln und zurŸckgeben
 		return new SpriteAsset(image);
 	}
 
@@ -97,24 +97,24 @@ public class AssetManagerImpl implements AssetManager {
 	public Asset load(String identifier) {
 		Asset asset = null;
 
-		// Das gewï¿½nschte Asset aus dem Store laden
+		// Das gewŸnschte Asset aus dem Store laden
 		asset = assetStore.get(identifier);
 
 		return asset;
 	}
 
 	/**
-	 * Lï¿½dt zunï¿½chst das Spritesheet als {@link SpriteAsset} und zerlegt dieses im Anschluï¿½
+	 * LŠdt zunŠchst das Spritesheet als {@link SpriteAsset} und zerlegt dieses im Anschlu§
 	 * in ein Array von Spriteassets.
 	 * 
-	 * Beachten: Diese Methode nimmt an, dass alle subsprites gleichgroï¿½ sind.
+	 * Beachten: Diese Methode nimmt an, dass alle subsprites gleichgro§ sind.
 	 */
 	@Override
 	public SpriteAsset[] loadSpriteSheet(String id, String path, int numSprites, int numRows, int numsCols) {
 		// Spritesheet laden
 		Asset asset = load(id, path);
 
-		// Prï¿½fen, ob es sich bei dem geladenen Asset wirklich um ein SpriteAsset handelt
+		// PrŸfen, ob es sich bei dem geladenen Asset wirklich um ein SpriteAsset handelt
 		if (asset instanceof SpriteAsset) {
 			SpriteAsset[] retArr = new SpriteAsset[numSprites];
 			SpriteAsset spriteAsset = (SpriteAsset) asset;
@@ -141,7 +141,7 @@ public class AssetManagerImpl implements AssetManager {
 	}
 
 	@Override
-	public Asset loadSprite(String identifier, InputStream in) {
+	public Asset load(String identifier, InputStream in) {
 		// TODO Auto-generated method stub
 		return null;
 	}
