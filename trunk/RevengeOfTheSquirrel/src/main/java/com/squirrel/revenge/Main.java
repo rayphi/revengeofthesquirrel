@@ -58,23 +58,6 @@ public class Main {
 		Layer skhdl = new SimpleKeyHandlerDemoLayer();
 		currentScene.addLayer(skhdl);
 		
-		final InteractingSimpleGameObject rsgo = new InteractingSimpleGameObject("testRSGO", skhdl);
-		SpriteAsset[] animArr = {(SpriteAsset) am.load("squirrel", "assets/images/Squirrel-75x75.png")};
-		rsgo.setSpriteArr(animArr);
-		if (animArr != null && animArr.length > 0) {
-			Rectangle[] bboxes = {new Rectangle(0,0,animArr[0].getImage().getWidth(null), animArr[0].getImage().getHeight(null))};
-			rsgo.setCollisionBoxes(bboxes);
-			rsgo.setDimension(animArr[0].getImage().getWidth(null), animArr[0].getImage().getHeight(null));
-		}
-		rsgo.setPosition(200, 100);
-		skhdl.addGameObject(rsgo);
-		
-		
-		InvisibleWall iw = new InvisibleWall("wall", skhdl);
-		iw.setPosition(100, 250);
-		iw.setDimension(300, 20);
-		skhdl.addGameObject(iw);
-		
 		{ // Layer des Spiels hinzufügen
 			currentScene.addLayer(new HUDLayer());
 			currentScene.addLayer(new BackgroundLayer());

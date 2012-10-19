@@ -31,14 +31,23 @@ public class SimpleKeyHandlerDemoLayer extends LayerImpl {
 		obj = new DemoSquirrel(this);
 		addGameObject(obj);
 		
-		InvisibleWall iw = new InvisibleWall("wall", this);
-		iw.setPosition(0, 250);
-		iw.setDimension(300, 20);
-		addGameObject(iw);
+		initWalls();
 		
 		initKeyMapping();
 	}
 	
+	private void initWalls() {
+		InvisibleWall iw_ground = new InvisibleWall("wall", this);
+		iw_ground.setPosition(0, 560);
+		iw_ground.setDimension(1280, 10);
+		addGameObject(iw_ground);
+		
+		InvisibleWall iw_wallLeft = new InvisibleWall("leftWall", this);
+		iw_wallLeft.setPosition(0, 0);
+		iw_wallLeft.setDimension(3, 559);
+		addGameObject(iw_wallLeft);
+	}
+
 	private void initKeyMapping() {
 		im.addKeyMapping(KeyEvent.VK_LEFT, new KeyHandler() {
 			@Override

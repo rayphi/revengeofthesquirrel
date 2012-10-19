@@ -25,7 +25,7 @@ public class DemoSquirrel extends UpdateableDrawableCollidableGameObject {
 	 * Eine gefakte Gravitation
 	 * TODO in irgendwelche Constants ausgliedern
 	 */
-	public static final double g = 5.0;
+	public static final double g = 10.0;
 	
 	/**
 	 * Enthält alle möglichen Animationen des {@link GameObject} welche über
@@ -33,7 +33,7 @@ public class DemoSquirrel extends UpdateableDrawableCollidableGameObject {
 	 */
 	protected Map<String, SpriteAsset[]> animationMap;
 	
-	private double maxSpeed = 100;
+	private double maxSpeed = 200;
 	
 	private double speed_x = 0;
 	private double speed_y = 0;
@@ -45,7 +45,7 @@ public class DemoSquirrel extends UpdateableDrawableCollidableGameObject {
 	
 	protected boolean jumping = false;
 	protected double jumpStartY = 0;
-	protected double maxJumpHeight = 100.0;
+	protected double maxJumpHeight = 150.0;
 	protected double jumpSpeed = 20.0;
 	
 	/**
@@ -87,16 +87,28 @@ public class DemoSquirrel extends UpdateableDrawableCollidableGameObject {
 		if (c instanceof InvisibleWall) {
 			// Es gab eine collision mit einer Bande
 			
-			// TODO Wo liegt das andere Objekt? (drüber drunter...)
-			Rectangle bottom = new Rectangle((int)posx, (int)posy + height, width, 1);
-			// TODO wenn drunter, dann grounded = true setzen
+			// Wo liegt das andere Objekt? (drüber drunter...)
+			// Links
+			Rectangle left = new Rectangle((int)posx, (int)2, 1, height-4);
+			if (c.collisionCheck(left)) {
+				if (movementHorizontal < 0)
+					movementHorizontal = 0;
+			}
+			
+			// Unten
+			Rectangle bottom = new Rectangle((int)posx+2, (int)posy + height, width-4, 1);
+			// wenn drunter, dann grounded = true setzen
 			if (c.collisionCheck(bottom)) {
 				grounded = true;
 				jumping = false;
 				if (movementVertical < 0) {
 					movementVertical = 0;
 				}
+				
+				if (c.getPosy() - posy <= this.height)
+					this.posy = c.getPosy() - (this.height - 1);
 			}
+			
 			// TODO Auswirkung auf Bewegung bestimmen
 				// Wenn grounded, dann keine negative vertikale bewegung...
 		} else {

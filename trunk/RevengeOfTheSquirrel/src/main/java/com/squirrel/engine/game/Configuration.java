@@ -16,8 +16,8 @@ public class Configuration {
 	 * der default Konstruktor initialisiert alle default werte
 	 */
 	public Configuration() {
-		screenWidth = 800;
-		screenHeight = 600;
+		screenWidth = 1280;
+		screenHeight = 955;
 		title = "Bitch, please...";
 	}
 	
