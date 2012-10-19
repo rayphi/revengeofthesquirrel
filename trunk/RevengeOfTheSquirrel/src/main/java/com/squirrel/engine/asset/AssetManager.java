@@ -5,8 +5,8 @@ import java.io.InputStream;
 import com.squirrel.engine.asset.impl.SpriteAsset;
 
 /**
- * Dieses Interface beschreibt die FunktionalitŠt zum Laden und Verwalten von
- * Game Assets, also Dateien, welche hinzugeladen werden mŸssen.
+ * Dieses Interface beschreibt die Funktionalitï¿½t zum Laden und Verwalten von
+ * Game Assets, also Dateien, welche hinzugeladen werden mï¿½ssen.
  * 
  * @author Shane
  *
@@ -14,17 +14,17 @@ import com.squirrel.engine.asset.impl.SpriteAsset;
 public interface AssetManager {
 
 	/**
-	 * LŠdt das gewŸnschte Asset, falls noch nicht geschehen und gibt eine
-	 * {@link Asset} ReprŠsentation zurŸck.
+	 * Lï¿½dt das gewï¿½nschte Asset, falls noch nicht geschehen und gibt eine
+	 * {@link Asset} Reprï¿½sentation zurï¿½ck.
 	 * 
 	 * @param identifier - Der Name unter dem das Asset Abrufbar sein soll
 	 * @param path - Der Pfad zu der Datei, welche geladen werden soll
-	 * @return {@link Asset} ReprŠsentation zum Asset
+	 * @return {@link Asset} Reprï¿½sentation zum Asset
 	 */
 	Asset load(String identifier, String path);
 
 	/**
-	 * Gibt das gewŸnschte Asset zurŸck, wenn es bereits geladen wurde, sost null
+	 * Gibt das gewï¿½nschte Asset zurï¿½ck, wenn es bereits geladen wurde, sost null
 	 * 
 	 * @param identifier
 	 * @return
@@ -32,16 +32,16 @@ public interface AssetManager {
 	Asset load(String identifier);
 	
 	/**
-	 * erzeugt ein Asset anhand des Ÿbergebenen InputStreams
+	 * erzeugt ein SpriteAsset anhand des ï¿½bergebenen InputStreams
 	 * 
 	 * @param identifier
 	 * @param in
 	 * @return
 	 */
-	Asset load(String identifier, InputStream in);
+	Asset loadSprite(String identifier, InputStream in);
 	
 	/**
-	 * LŠdt ein sortiertes und symmetrisches sprite sheet und erzeugt ein 
+	 * Lï¿½dt ein sortiertes und symmetrisches sprite sheet und erzeugt ein 
 	 * Array aus den Einzelbildern
 	 * 
 	 * @param id
