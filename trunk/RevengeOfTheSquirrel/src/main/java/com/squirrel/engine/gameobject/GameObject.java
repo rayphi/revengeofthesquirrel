@@ -2,8 +2,10 @@ package com.squirrel.engine.gameobject;
 
 import java.util.Map;
 
+import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.layer.Layer;
 import com.squirrel.engine.scene.impl.SceneArchiveConstants;
+import com.squirrel.engine.utils.ApplicationUtils;
 
 /**
  * Repr�sentiert ein beliebiges Objekt im Spiel, z.B die Spielfigur, oder ein Element
@@ -36,6 +38,8 @@ public abstract class GameObject {
 	 */
 	protected Layer parent;
 	
+	protected Configuration config;
+	
 	public Layer getParent() {
 		return parent;
 	}
@@ -53,6 +57,8 @@ public abstract class GameObject {
 	public GameObject(String identifier, Layer parent) {
 		this.identifier = identifier;
 		this.parent = parent;
+		
+		this.config = (Configuration) ApplicationUtils.getInstance().getBean("configuration");
 	}
 	
 	/**

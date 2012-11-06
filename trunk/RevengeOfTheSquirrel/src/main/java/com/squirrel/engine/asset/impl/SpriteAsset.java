@@ -5,7 +5,7 @@ import java.awt.Image;
 import com.squirrel.engine.asset.Asset;
 
 /**
- * Dieser AssetTyp ehntält ein Image
+ * Dieser AssetTyp ehnt√§lt ein Image
  * 
  * @author Shane
  *
@@ -13,7 +13,7 @@ import com.squirrel.engine.asset.Asset;
 public class SpriteAsset extends Asset {
 
 	/**
-	 * enthält die Type Konstante des ImageAsset
+	 * enth√§lt die Type Konstante des ImageAsset
 	 */
 	public static final String IMAGE_ASSET_TYPE = "image-asset-type";
 	
@@ -32,7 +32,7 @@ public class SpriteAsset extends Asset {
 	}
 	
 	/**
-	 * Gibt das Image zurück
+	 * Gibt das Image zurÔøΩck
 	 * 
 	 * @return
 	 */
