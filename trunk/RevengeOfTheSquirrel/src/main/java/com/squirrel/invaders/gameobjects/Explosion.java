@@ -21,6 +21,8 @@ public class Explosion extends UpdateableDrawableCollidableGameObject {
 		for (int i=0; i<collisionBoxes.length; i++) {
 			collisionBoxes[i] = new Rectangle(0,0,spriteArr[i].getImage().getWidth(null), spriteArr[i].getImage().getHeight(null));
 		}
+		
+		setDimension(spriteArr[0].getImage().getWidth(null), spriteArr[0].getImage().getHeight(null));
 	}
 
 	@Override
@@ -28,4 +30,5 @@ public class Explosion extends UpdateableDrawableCollidableGameObject {
 		if (nextImage == spriteArr.length - 1)
 			parent.removeGameObjectAtUpdate(this);
 	}
+	
 }

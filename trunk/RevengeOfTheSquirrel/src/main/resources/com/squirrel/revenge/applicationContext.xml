@@ -51,6 +51,6 @@
 	
 	
 	<!-- ************************** game beans *************************************************** -->
-	<bean id="scoreManager" class="com.squirrel.revenge.score.ScoreManager" scope="singleton" />
+	<bean id="scoreManager" class="com.squirrel.engine.score.ScoreManager" scope="singleton" />
 	
 </beans>

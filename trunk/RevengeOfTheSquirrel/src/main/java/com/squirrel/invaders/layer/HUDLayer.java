@@ -5,8 +5,8 @@ import java.awt.Point;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.impl.TextualGameObject;
 import com.squirrel.engine.layer.impl.LayerImpl;
+import com.squirrel.engine.score.ScoreManager;
 import com.squirrel.engine.utils.ApplicationUtils;
-import com.squirrel.revenge.score.ScoreManager;
 
 public class HUDLayer extends LayerImpl {
 

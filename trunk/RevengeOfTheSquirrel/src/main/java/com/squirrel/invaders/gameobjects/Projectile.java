@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import com.squirrel.engine.asset.AssetManager;
 import com.squirrel.engine.asset.impl.SpriteAsset;
 import com.squirrel.engine.event.impl.CollisionEvent;
+import com.squirrel.engine.gameobject.Collidable;
 import com.squirrel.engine.gameobject.impl.UpdateableDrawableCollidableGameObject;
 import com.squirrel.engine.layer.Layer;
 import com.squirrel.engine.statistics.PerformanceStatistics;
@@ -48,10 +49,17 @@ public class Projectile extends UpdateableDrawableCollidableGameObject {
 
 	@Override
 	public void onCollision(CollisionEvent cevt) {
+		Collidable target = cevt.getTarget();
+		
+		if (target instanceof Explosion) {
+			return;
+		}
 		
 		// Explosion starten
 		Explosion exp = new Explosion(parent);
-		exp.setPosition(posx, posy);
+		
+		exp.setPosition(posx - ((exp.getWidth() / 2) + (width / 2)), 
+						posy - ((exp.getHeight() / 2) + (height / 2)));
 		parent.addGameObjectAtUpdate(exp);
 		
 		// Projektil entfernen

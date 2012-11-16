@@ -1,8 +1,8 @@
-package com.squirrel.revenge.score;
+package com.squirrel.engine.score;
 
 /**
- * Ein simpler ScoreManager der einfach nur einen Punktestand hŠlt,
- * welcher Ÿber die zur VerfŸgung gestellte Methoden manipuliert werden kann
+ * Ein simpler ScoreManager der einfach nur einen Punktestand hï¿½lt,
+ * welcher ï¿½ber die zur Verfï¿½gung gestellte Methoden manipuliert werden kann
  * 
  * @author Andreas
  *
@@ -35,7 +35,7 @@ public class ScoreManager {
 	}
 	
 	/**
-	 *  Setzt den Score auf 0 zurŸck, in einem neuen Spiel
+	 *  Setzt den Score auf 0 zurï¿½ck, in einem neuen Spiel
 	 */
 	public void resetScore()
 	{

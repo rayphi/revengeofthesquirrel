@@ -5,8 +5,8 @@ import java.awt.Point;
 import com.squirrel.engine.game.Configuration;
 import com.squirrel.engine.gameobject.impl.TextualGameObject;
 import com.squirrel.engine.layer.impl.LayerImpl;
+import com.squirrel.engine.score.ScoreManager;
 import com.squirrel.engine.utils.ApplicationUtils;
-import com.squirrel.revenge.score.ScoreManager;
 
 /**
  * Dieser Layer realisiert ein HUD
@@ -19,7 +19,7 @@ public class HUDLayer extends LayerImpl {
 	public HUDLayer() {
 		super("HUD");
 	
-		// Die hšchste PrioritŠt wird als letztes gezeichnet und liegt somit ganz oben,
+		// Die hï¿½chste Prioritï¿½t wird als letztes gezeichnet und liegt somit ganz oben,
 		// deswegen bekommt dieser Layer eine extrem hohe Prio
 		setPriority(10000);
 		
