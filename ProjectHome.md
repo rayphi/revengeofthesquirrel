@@ -1,0 +1,1 @@
+This is a school project. We decided a revenge-taking squirrel might be some kind of fun.
